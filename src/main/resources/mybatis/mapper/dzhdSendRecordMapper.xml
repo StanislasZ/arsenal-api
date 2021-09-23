@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cmbnb.weChatNotice.modules.cbs.mapper.DzhdSendRecordMapper">
+
+    <insert id="addDzhdSendRecordList">
+        insert into dzhd_send_record
+        (
+            `bnk_flw`, `send_date`
+        )
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+            #{item.bnkFlw}, #{item.sendDate}
+        )
+        </foreach>
+    </insert>
+
+
+    <select id="getTodaySendBnkFlwList" resultType="String">
+        select distinct bnk_flw from dzhd_send_record
+        where send_date = current_date
+            and bnk_flw is not null
+            and bnk_flw != ''
+    </select>
+</mapper>

@@ -1,2 +1,2 @@
-# FA22.5740054_hes-corp-wechat-notice-api
-海尔施企业微信智能通知系统api
+# FA31.5740039_mortgage-info-query-api
+个贷抵押信息查询API
