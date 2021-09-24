@@ -28,12 +28,12 @@ public class AppInitRunner implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
 
 
-        SchedulingRunnable checkDzhdTask = new SchedulingRunnable("cbsService",
-                "handleTodayDetailAndNotice",
-                null);
-        cronTaskRegistrar.addCronTask(checkDzhdTask, checkDzhdCron);
-
-        System.out.println("application 启动， 把cbsService方法 加入 定时任务中.... ");
+//        SchedulingRunnable checkDzhdTask = new SchedulingRunnable("cbsService",
+//                "handleTodayDetailAndNotice",
+//                null);
+//        cronTaskRegistrar.addCronTask(checkDzhdTask, checkDzhdCron);
+//
+//        System.out.println("application 启动， 把cbsService方法 加入 定时任务中.... ");
     }
 }
 

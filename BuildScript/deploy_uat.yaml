@@ -2,10 +2,10 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: mortgage-info-api-conf
-  namespace: fa31-5740039-lsxd
+  name: hes-corp-notice-api-conf
+  namespace: fa22-5740054-crm
 data:
-  mortgage-info-api.yml: |
+  hes-corp-notice-api.yml: |
 
     # OWK 的配置
     owk:
@@ -33,10 +33,10 @@ data:
     spring:
       datasource:
         type: com.alibaba.druid.pool.DruidDataSource
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://55.14.89.243:3306/nbxcx?characterEncoding=UTF-8&serverTimezone=GMT%2B8
-        username: nbxcx
-        password: ENC(kOyW78KVj6JQauJa+sYUW0AJEf0xf9ew)
+        driver-class-name: org.sqlite.JDBC
+        url: jdbc:sqlite:D:/zry/software/sqliteDb/hes.db
+        username:
+        password:
 
       servlet: # servlet 的文件文件上传大小限制。
         multipart:
@@ -78,51 +78,56 @@ data:
         zhRobotSendUrl: http://msg-notice-sys-mysql.bcs.cmbchina.cn/msg-notice-sys/msgNotice/zhrobotMsg.do # 招呼robot 发送接口.
         mngUsr: 295461 # 接口发送人.
 
+    config:
+      checkDzhdCron: 0/2 * * * * ?  # 定时任务cron
 
-    webservice:
-      server: http://99.62.247.75:8803
-      visitIp: 60.24.1.28
-      organCode: C1030833000191
 
-      url:
-        dgcx: ${webservice.server}/services/dgcx?wsdl
-        mycx: ${webservice.server}/services/mycx?wsdl
-        plcx: ${webservice.server}/services/plcx?wsdl
-        plxz: ${webservice.server}/services/plxz?wsdl
-        rqqjcx: ${webservice.server}/services/rqqjcx?wsdl
-      sm2:
-        private-key: 32eee565c9e1a963b693e4edf77d0913d635dd04bebbd70a6d55765d61bd4a1f
-      sm4:
-        privateKey: 40E8C55D85E74DCC80E382CE416001A4
+    wechat:
+      corpid: ww4d810f1479a29e4b
+      agentId: 1000012
+      corpsecret: IZw9gfoN_l3ORgZBb1vRGipv2nGkq_GOlh8rRv0dj_o
+      accessTokenUrl: https://qyapi.weixin.qq.com/cgi-bin/gettoken
+      msgSendUrl: https://qyapi.weixin.qq.com/cgi-bin/message/send
+      msgSendToGroupUrl: https://qyapi.weixin.qq.com/cgi-bin/appchat/send   # 群聊发送消息 接口
+      mediaUploadUrl: https://qyapi.weixin.qq.com/cgi-bin/media/upload
+      skGroupChatId: wrW9_0EAAAb1Mz1w0YL10rl5mhWr8_Bg   # 收款- 发送文件到 群聊，这个群聊的 chatid
+
+    cbs:
+      requestHttpUrl: http://127.0.0.1:10666
+      bwKey: 2
+      CRC32_PASSWORD: CMBChina2009
+      CRC32_PREFIX: Z
+      actNbr: 591915131410208,310899991010008776083,755915678910506,755915678910202  # 交易账户
+
 
 
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mortgage-info-api
+  name: hes-corp-notice-api
   labels:
-    app: mortgage-info-api
-  namespace: fa31-5740039-lsxd
+    app: hes-corp-notice-api
+  namespace: fa22-5740054-crm
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mortgage-info-api
+      app: hes-corp-notice-api
   template:
     metadata:
       labels:
-        app: mortgage-info-api
+        app: hes-corp-notice-api
     spec:
       restartPolicy: Always
       containers:
-        - name: mortgage-info-api
+        - name: hes-corp-notice-api
           image: [image]
           imagePullPolicy: Always
           volumeMounts:
-            - name: mortgage-info-api-volumn
-              subPath: mortgage-info-api.yml
-              mountPath: /opt/mortgage-info-api.yml
+            - name: hes-corp-notice-api-volumn
+              subPath: hes-corp-notice-api.yml
+              mountPath: /opt/hes-corp-notice-api.yml
           ports:
             - containerPort: 8080
           resources:
@@ -134,23 +139,23 @@ spec:
               memory: 2G
           env:
             - name: JAVA_OPTS
-              value: '-Xms1363148K -XX:MetaspaceSize=209715K -Xss699K -Xmx1363148K -XX:MaxMetaspaceSize=209715K -Dspring.config.location=/opt/mortgage-info-api.yml'
+              value: '-Xms1363148K -XX:MetaspaceSize=209715K -Xss699K -Xmx1363148K -XX:MaxMetaspaceSize=209715K -Dspring.config.location=/opt/hes-corp-notice-api.yml'
             - name: LANG
               value: en_US.utf8
             - name: TZ
               value: Asia/Shanghai
       volumes:
-        - name: mortgage-info-api-volumn
+        - name: hes-corp-notice-api-volumn
           configMap:
-            name: mortgage-info-api-conf
+            name: hes-corp-notice-api-conf
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: mortgage-info-api
+  name: hes-corp-notice-api
   labels:
-    app: mortgage-info-api
-  namespace: fa31-5740039-lsxd
+    app: hes-corp-notice-api
+  namespace: fa22-5740054-crm
 spec:
   type: ClusterIP
   ports:
@@ -159,4 +164,4 @@ spec:
       name: 8080-8080
       port: 8080
   selector:
-    app: mortgage-info-api
+    app: hes-corp-notice-api
