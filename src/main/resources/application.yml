@@ -1,26 +1,3 @@
-# OWK 的配置
-owk:
-  client:
-    gateway: http://test-nbowk-plus.bcs.cmbchina.cn # owk 网关
-    appId: oa-cwbx  # 在2.0 中注册 appId 和  appPwd
-    appPwd: 6Nd4XHAtoabCN8xS9hcNhBPc1buYrEi+6QBRFEZvmZ0=
-  store: # 引入 owk-store 后支持ESC.
-    policy: ecs
-    ecs:
-      end-point: http://99.12.100.29:9020
-      access-key: lq01_user4
-      secret-key: 5zPZmWretfc+yOcQ+sMqZeMVZAf6CqneMVJaFbbn
-      bucket-name: lq01_06_ocmhk201901.11
-      url-expire-seconds: 300
-      gateway:
-        host: http://99.12.227.173
-        app-id: lq01_user4
-        app-key: 26caff63-6a11-4ecd-bebe-f60a43598d59
-  osf-client: # osf支持
-    server: http://99.6.136.73:8888/osf-service
-    app-id: OWK
-    app-pwd: OWK
-
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
@@ -28,6 +5,8 @@ spring:
     url: jdbc:sqlite:D:/zry/software/sqliteDb/hes.db
     username:
     password:
+    druid:
+      validation-query: select 1
 
   servlet: # servlet 的文件文件上传大小限制。
     multipart:
@@ -47,31 +26,10 @@ mybatis:
 pagehelper: # pageHelper 分页插件设置
   auto-runtime-dialect: true # 自动切换方言,不开启此项的话，会导致不同数据库sql 格式错误
 
-# 日志
-logging:
-  level:
-    root: INFO
-    com.cmbnt.owk: DEBUG
-    com.cmbchina.owk: DEBUG
-    org.springframework: DEBUG
-    org.apache.ibatis: DEBUG
-    com.cmbnb: DEBUG # 添加宁波分行的log.
 
-server:
-  port: 8081
-jasypt:
-  encryptor:
-#    password: ${ENCRYPTOR_PASSWORD}
-    password: gxxd
-
-ksxt:
-  msg: # 发送信息接口配置.
-    zhRobotSendUrl: http://msg-notice-sys-mysql.bcs.cmbchina.cn/msg-notice-sys/msgNotice/zhrobotMsg.do # 招呼robot 发送接口.
-    mngUsr: 295461 # 接口发送人.
 
 config:
-  checkDzhdCron: 0/2 * * * * ?  # 定时任务cron
-
+  checkDzhdCron: 0 0/5 * * * ?  # 定时任务cron
 
 wechat:
   corpid: ww4d810f1479a29e4b
@@ -91,7 +49,6 @@ cbs:
   actNbr: 591915131410208,310899991010008776083,755915678910506,755915678910202  # 交易账户
 
 
-
-
-
+server:
+  port: 8081
 

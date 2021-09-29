@@ -111,54 +111,55 @@ public class CbsService {
      * 处理当日明细数据， 按  收款 付款 区分， 最后通知客户
      */
     public void handleTodayDetailAndNotice() {
-        System.out.println("handleTodayDetailAndNotice....");
+        log.info("handleTodayDetailAndNotice....");
 
         //获取今日已经发送成功过电子回单的    bnkFlw的列表
         List<String> todaySendBnkFlwList = dzhdSendRecordMapper.getTodaySendBnkFlwList();
-        System.out.println("todaySendBnkFlwList = " + todaySendBnkFlwList);
+        log.info("todaySendBnkFlwList = {}", todaySendBnkFlwList);
 
         // 先拿到今日明细
         List<Ercurdtlz> todayDetailList = getTodayDetail();
 
 
-        //当日明细中， 收款的
+        //当日明细中， 收款的 ，  进行过滤
+        //规则为 借贷方向=2，存在银行流水号且不再今日已发送里，款项类型为货款
         List<Ercurdtlz> todayDetailSkList = todayDetailList
                 .stream()
-                .filter(ele ->  !StringUtils.isEmpty(ele.getItmDir())
-                        && ele.getItmDir().equals("2")
-                        && !StringUtils.isEmpty(ele.getBnkFlw())
-                        && !todaySendBnkFlwList.contains(ele.getBnkFlw()))
+                .filter(ele ->  !StringUtils.isEmpty(ele.getItmDir()) && ele.getItmDir().equals("2")
+                        && !StringUtils.isEmpty(ele.getBnkFlw()) && !todaySendBnkFlwList.contains(ele.getBnkFlw())
+                        && !StringUtils.isEmpty(ele.getMonTyp()) && ele.getMonTyp().equals("03")
+                )
                 .collect(Collectors.toList());
 
 
         //当日明细中， 付款的
         List<Ercurdtlz> todayDetailFkList = todayDetailList
                 .stream()
-                .filter(ele -> !StringUtils.isEmpty(ele.getItmDir())
-                        && ele.getItmDir().equals("1")
-                        && !StringUtils.isEmpty(ele.getBnkFlw())
+                .filter(ele -> !StringUtils.isEmpty(ele.getItmDir()) && ele.getItmDir().equals("1")
+                        && !StringUtils.isEmpty(ele.getBnkFlw()) && !todaySendBnkFlwList.contains(ele.getBnkFlw())
                         && !StringUtils.isEmpty(ele.getPayNbr())
-                        && !todaySendBnkFlwList.contains(ele.getBnkFlw()))
+                )
                 .collect(Collectors.toList());
 
-        System.out.println("todayDetailSkList 收款 List.size = " + todayDetailSkList.size());
-        System.out.println("todayDetailSkList 付款 List.size = " + todayDetailFkList.size());
+        log.info("过滤收款后，（借贷方向=2，存在银行流水号且不再今日已发送里，款项类型为货款） todayDetailSkList 收款 List.size = {}", todayDetailSkList.size());
+        log.info("过滤付款后，（借贷方向=1，存在银行流水号且不再今日已发送里，存在支付流水号） todayDetailSkList 付款 List.size = {}", todayDetailFkList.size());
+
 
         if (todayDetailSkList.size() == 0 && todayDetailFkList.size() == 0) {
-            System.out.println("今天到现在，过滤后的 收付款 列表 都为空");
+            log.info("今天到现在，过滤后的 收付款 列表 都为空");
             return;
         }
 
         //5.1接口  拿到电子回单数据
         List<Dcdrqryz1> todayDzhdList = getTodayDzhd();
-        System.out.println("todayDzhdList = ");
-        todayDzhdList.forEach(System.out::println);
+        log.info("todayDzhdList = {}", JSONObject.toJSONString(todayDzhdList));
+
 
         //把todayDzhdList 转化 成  Map， key为list元素的bnkFlw， 值为元素
         Map<String, List<Dcdrqryz1>> bnkFlwDcdrqryz1Map = todayDzhdList
                 .stream()
                 .collect(Collectors.groupingBy(Dcdrqryz1::getBnkFlw));
-        System.out.println("bnkFlwDcdrqryz1Map = " + bnkFlwDcdrqryz1Map);
+        log.info("bnkFlwDcdrqryz1Map = {}", bnkFlwDcdrqryz1Map);
 
         //5.2接口  主要拿到电子回单的 pdf文件路径
         DzhdInfo todayDzhdInfo = getDzhdPdfList(todayDzhdList);
@@ -191,20 +192,20 @@ public class CbsService {
                                         DzhdInfo todayDzhdInfoFrom52,
                                         PaySettleData psdFrom112) {
 
-        System.out.println("handleTodayDetailFkList");
+        log.info("handleTodayDetailFkList");
 
 
         //拿到 打印实例号 -  图片路径  的 对应关系
         JSONObject istNbrImPathMap = todayDzhdInfoFrom52.getIstNbrImPathMap();
-        System.out.println("istNbrImPathMap = " + istNbrImPathMap);
+        log.info("istNbrImPathMap = {}", istNbrImPathMap);
 
         for (Ercurdtlz fk: todayDetailFkListFrom28) {
 
-            System.out.println("fk = " + fk);
+            log.info("fk = {}", fk);
 
             String bnkFlw = fk.getBnkFlw();
             String payNbr = fk.getPayNbr();
-            System.out.println("bnkFlw = " + bnkFlw + ", 对应 payNbr = " + payNbr);
+            log.info("bnkFlw = {}, payNbr = {}", bnkFlw, payNbr);
 
             //用 bnkFlw 到 bnkFlwDcdrqryz1Map 找到 Dcdrqryz1 （5.1返回）  对象
             List<Dcdrqryz1> dcdrqryz1List = bnkFlwDcdrqryz1Map.get(bnkFlw);
@@ -218,11 +219,16 @@ public class CbsService {
             //微信里推送文件时， 展示的文件名
             String wechatFileName = todayDzhd.getRcvEan();
             if (StringUtils.isEmpty(wechatFileName)) {
+                wechatFileName = fk.getOthNam();
+            }
+            if (StringUtils.isEmpty(wechatFileName)) {
                 wechatFileName = "付款电子回单";
             }
 
-            //拿 微信里 要发送到谁  的 姓名
+            log.info("bnkFlw = {}, istNbr = {}, 对方户名={}， 对应 imPath = {}", bnkFlw, todayDzhd.getIstNbr(), wechatFileName, imPath);
 
+
+            //拿 微信里 要发送到谁  的 姓名
 
             Map<String, String> busNbrErpCm1Map = psdFrom112.getBusNbrErpCm1Map();
 
@@ -235,27 +241,28 @@ public class CbsService {
 //            }
 
 
-
             String wechatSendUserName = busNbrErpCm1Map.get(payNbr);
-            System.out.println("wechatSendUserName = " + wechatSendUserName);
+            log.info("这个付款回单要发送的人的名字wechatSendUserName = {}", wechatSendUserName);
             if (StringUtils.isEmpty(wechatSendUserName)) {
-                System.out.println("没找到 ErpCm1 备注");
+                log.info("没找到 ErpCm1 备注, continue");
                 continue;
             }
+            log.info("对应 ERPCm1备注 = {}", wechatSendUserName);
+
             //用wechatSendUserName 找到 对应的 wechar userId， 万一有重名，用List接收
-            List<String> ids = wechatUserMapper.getWechatUserList(wechatSendUserName)
+            List<String> ids = wechatUserMapper.getWechatUserListByName(wechatSendUserName)
                     .stream()
                     .map(ele -> ele.getWechatId())
                     .distinct()
                     .collect(Collectors.toList());
             if (CollectionUtils.isEmpty(ids)) {
-                System.out.println(wechatSendUserName + " 在数据库中 找不到 对应微信id");
+                log.info("{} 在数据库中 找不到这个名字 对应微信的id, continue", wechatSendUserName);
                 continue;
             }
 
             try {
                 String media_id = weChatService.uploadMediaAndGetId(imPath, wechatFileName, bnkFlw);
-                System.out.println("media_id = " + media_id + ", 微信里发文件时展示的文件名 = " + wechatFileName);
+                log.info("media_id = {}, 微信里发文件时展示的文件名 = {}", media_id, wechatFileName);
 
                 //发送文件 到 企业微信的 某个人 或几个人
                 String touser = "";
@@ -266,12 +273,12 @@ public class CbsService {
                         touser = touser + ids.get(i);
                     }
                 }
-                System.out.println("touser = " + touser);
+                log.info("touser = {}", touser);
                 //发送文件到个人
                 weChatService.sendFileToUser(touser, media_id);
 
                 //发送成功后，更新 dzhd_send_record表
-                System.out.println("发送成功，更新record表");
+                log.info("发送成功，更新record表");
                 DzhdSendRecord record = new DzhdSendRecord();
                 record.setBnkFlw(bnkFlw);
                 record.setSendDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
@@ -302,22 +309,16 @@ public class CbsService {
                                         Map<String, List<Dcdrqryz1>> bnkFlwDcdrqryz1Map,
                                         DzhdInfo todayDzhdInfoFrom52) {
 
-        System.out.println("todayDetailSkListFrom28 .size = " + todayDetailSkListFrom28.size());
-        System.out.println("-------");
-        System.out.println("todayDetailSkListFrom28 = " );
-        todayDetailSkListFrom28.forEach(System.out::println);
-        System.out.println("-------");
-
+        log.info("handleTodayDetailSkList");
 
         //拿到 打印实例号 -  图片路径  的 对应关系
         JSONObject istNbrImPathMap = todayDzhdInfoFrom52.getIstNbrImPathMap();
-        System.out.println("istNbrImPathMap = " + istNbrImPathMap);
+        log.info("istNbrImPathMap = {}", istNbrImPathMap);
 
 
         for (Ercurdtlz sk: todayDetailSkListFrom28) {
 
-            System.out.println("sk = " + sk);
-
+            log.info("sk = {}", sk);
             String bnkFlw = sk.getBnkFlw();
 
             //用 bnkFlw 到 bnkFlwDcdrqryz1Map 找到 Dcdrqryz1 （5.1返回）  对象
@@ -332,26 +333,22 @@ public class CbsService {
             //微信里推送文件时， 展示的文件名
             String wechatFileName = todayDzhd.getRcvEan();
             if (StringUtils.isEmpty(wechatFileName)) {
+                wechatFileName = sk.getOthNam();
+            }
+            if (StringUtils.isEmpty(wechatFileName)) {
                 wechatFileName = "收款电子回单";
             }
 
-
-
-            System.out.println("bnkFlw = " + bnkFlw + ", 对应 istNbr = " + todayDzhd.getIstNbr() + ", 对应 imPath = " + imPath);
-
+            log.info("bnkFlw = {}, istNbr = {}, 对方户名={}， 对应 imPath = {}", bnkFlw, todayDzhd.getIstNbr(), wechatFileName, imPath);
 
             File file = new File(imPath);
-            System.out.println(file);
-
-
             try {
                 String media_id = weChatService.uploadMediaAndGetId(imPath, wechatFileName, bnkFlw);
-                System.out.println("media_id = " + media_id + ", 微信里发文件时展示的文件名 = " + wechatFileName);
-
+                log.info("media_id = {}, 微信里发文件时展示的文件名 = {}", media_id, wechatFileName);
                 //企业微信群发
                 weChatService.sendFileToGroup(media_id, weChatConfig.getSkGroupChatId());
                 //发送成功后，更新 dzhd_send_record表
-                System.out.println("发送成功，更新record表");
+                log.info("发送成功，更新record表");
                 DzhdSendRecord record = new DzhdSendRecord();
                 record.setBnkFlw(bnkFlw);
                 record.setSendDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
@@ -361,8 +358,6 @@ public class CbsService {
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-
-
 
 
         }
@@ -403,12 +398,11 @@ public class CbsService {
                     .collect(Collectors.toList());
 
             if (apbusnbrxList.size() == 0) {
-                System.out.println("这部分 Apbusnbrx List.size = 0 , 不请求，直接return");
+                log.info("请求支付结算1.12这部分 Apbusnbrx List.size = 0 , 不请求，直接return");
                 return;
             }
 
-            System.out.println("转化成 112的请求报文中的 Apbusnbrx List  = ");
-            apbusnbrxList.forEach(System.out::println);
+            log.info("转化成 112的请求报文中的 Apbusnbrx List  = {}", apbusnbrxList);
             //设置 ApbusnbrxList
             dataReq.setApbusnbrxList(apbusnbrxList);
 
@@ -419,30 +413,28 @@ public class CbsService {
             pgk.setCheckCode(checkNumUtil.GetCheckSumWithCRC32(pgk.getData()));
             String xml = XmlUtil.convert2Xml(pgk, "GBK");
 
-            System.out.println("    1.12请求报文 = ");
-            System.out.println(xml);
-
+            log.info("    1.12请求报文 = {}", xml);
 
             //2. 请求接口，获得返回的报文
             String respStr = httpRequest(cbsConfig.getRequestHttpUrl(), "GET", xml);
             //把返回报文 解析成  对象
-            System.out.println("1.12返回报文 = " + respStr);
+            log.info("1.12返回报文 = {}", respStr);
 
             Pgk pgkResp = XmlUtil.convert2JavaBean(respStr, Pgk.class);
 
             ErpayqryDataResp112 dataResp = pgkResp.getDataByType(ErpayqryDataResp112.class);
-            System.out.println("返回报文data部分 解析成 对象后，  dataResp = "  + dataResp);
 
             List<Appayinfz> appayinfzList = dataResp.getAppayinfzList();
-            System.out.println("返回报文中 解析出 appayinfzList.size = " + appayinfzList.size() + ", 具体如下");
-            appayinfzList.forEach(System.out::println);
+            if (appayinfzList == null) appayinfzList = new ArrayList<>();
+            log.info("1.12返回报文中 解析出 appayinfzList.size = {}", appayinfzList.size());
+
 
             //过滤掉 业务流水号 为空的
             List<Appayinfz> validAppayinfzList = appayinfzList
                     .stream()
                     .filter(ele -> !StringTools.existEmpty(ele.getBusNbr()))
                     .collect(Collectors.toList());
-            System.out.println("过滤后， size = " + validAppayinfzList.size());
+            log.info("1.12过滤后， size = {}", validAppayinfzList.size());
 
 
             rltAppayinfzList.addAll(validAppayinfzList);
@@ -468,14 +460,13 @@ public class CbsService {
      * @return
      */
     public DzhdInfo getDzhdPdfList(List<Dcdrqryz1> todayDzhdList) {
-//        JSONObject rlt = new JSONObject();
+
         List<Ntprtmsgy> ntprtmsgyRltList = new ArrayList<>();
         List<Dcprtrcpz> dcprtrcpzRltList = new ArrayList<>();
         JSONObject istNbrImPathMap = new JSONObject();
 
         //怕报文太长报错， 分批操作， 先设置为400个一批， 后面可改为外部配置批次大小
         CommonUtils.batchExecute(todayDzhdList, 400, smallList -> {
-
 
             //生成报文
             DcprtrdpDataReq52 dataReq = new DcprtrdpDataReq52();
@@ -495,8 +486,13 @@ public class CbsService {
                         dcprtrcpx.setPrtFlg("2");
                         return dcprtrcpx;
                     }).collect(Collectors.toList());
-//            System.out.println("5.2接口 请求报文中 dcprtrcpxList =");
-//            dcprtrcpxList.forEach(System.out::println);
+
+            if (CollectionUtils.isEmpty(dcprtrcpxList)) {
+                log.info("smallList过滤后， size = 0，不再请求5.2");
+                return;
+            }
+
+
             dataReq.setDcprtrcpxList(dcprtrcpxList);
 
 
@@ -507,34 +503,34 @@ public class CbsService {
             pgk.setCheckCode(checkNumUtil.GetCheckSumWithCRC32(pgk.getData()));
             String xml = XmlUtil.convert2Xml(pgk, "GBK");
 
-//            System.out.println("    5.2请求报文 = ");
-//            System.out.println(xml);
+            log.info("    5.2请求报文 = {}", xml);
 
 
             //2. 请求接口，获得返回的报文
             String respStr = httpRequest(cbsConfig.getRequestHttpUrl(), "GET", xml);
 
-//            System.out.println("    -------- ");
-//            System.out.println("    -------- ");
-//            System.out.println("    5.2返回报文为： ");
-//            System.out.println("    -------- ");
-//            System.out.println(respStr);
+            log.info("    5.2返回报文为： ", respStr);
+            log.info("    -------- ");
 
             //把返回报文 解析成  对象
 
             Pgk pgkResp = XmlUtil.convert2JavaBean(respStr, Pgk.class);
 
             DcprtrdpDataResp52 dataResp = pgkResp.getDataByType(DcprtrdpDataResp52.class);
-            System.out.println("返回报文data部分 解析成 对象后，  dataResp = "  + dataResp);
 
             List<Ntprtmsgy> ntprtmsgyList = dataResp.getNtprtmsgyList();
-            System.out.println("返回报文中 解析出 ntprtmsgyList = ");
-            ntprtmsgyList.forEach(System.out::println);
+            if (ntprtmsgyList == null) ntprtmsgyList = new ArrayList<>();
+
+
+            log.info("5.2返回报文中 解析出 ntprtmsgyList 未过滤size  = {}", ntprtmsgyList.size());
+
 
             List<Ntprtmsgy> validDzhdPdfList = ntprtmsgyList
                     .stream()
                     .filter(ele -> ele.getErrCod().equals("0000000"))
                     .collect(Collectors.toList());
+            log.info("5.2返回报文中 解析出 ntprtmsgyList 过滤后size  = {}", validDzhdPdfList.size());
+
             ntprtmsgyRltList.addAll(validDzhdPdfList);
 
             List<String> validIstNbrList = ntprtmsgyList
@@ -545,8 +541,8 @@ public class CbsService {
 
 
             List<Dcprtrcpz> dcprtrcpzList = dataResp.getDcprtrcpzList();
-//            System.out.println("返回报文中 解析出 dcprtrcpzList = ");
-//            dcprtrcpzList.forEach(System.out::println);
+            if (dcprtrcpzList == null) dcprtrcpzList = new ArrayList<>();
+
             dcprtrcpzRltList.addAll(dcprtrcpzList);
 
             //处理2个list， 生成一个 key为 打印实例号 ， 值为回单路径的 map
@@ -557,23 +553,12 @@ public class CbsService {
                 istNbrImPathMap.put(dcprtrcpz.getIstNbr(), dcprtrcpz.getImPath());
             }
 
-
-
-
-
         });
-
-//        System.out.println("5.2最终返回的 电子回单pdfList .size = " + ntprtmsgyRltList.size());
-
-//        rlt.put("ntprtmsgyList", ntprtmsgyRltList);
-//        rlt.put("dcprtrcpzRltList", dcprtrcpzRltList);
-//        rlt.put("istNbrImPathMap", istNbrImPathMap);
 
         DzhdInfo dzhdInfo = new DzhdInfo();
         dzhdInfo.setNtprtmsgyRltList(ntprtmsgyRltList);
         dzhdInfo.setDcprtrcpzRltList(dcprtrcpzRltList);
         dzhdInfo.setIstNbrImPathMap(istNbrImPathMap);
-
 
         return dzhdInfo;
     }
@@ -591,8 +576,8 @@ public class CbsService {
         String[] actNbrArr = actNbrStr.split(",");
 
         for (int i = 0; i < actNbrArr.length; i++) {
-            System.out.println("*******************************************************");
-            System.out.println("*******************************************************");
+            log.info("*******************************************************");
+            log.info("*******************************************************");
 
             //用这个交易账户进行请求
             int batchIndex = 0;
@@ -601,7 +586,7 @@ public class CbsService {
             //若数据量大，则使用续传号持续请求
             while (!StringUtils.isEmpty(sqrNb1)) {
 
-                System.out.println("actNbr = " + actNbrArr[i] + ", batchIndex = " + batchIndex);
+                log.info("actNbr = {}, batchIndex = {}", actNbrArr[i], batchIndex);
 
                 //1. 生成报文
                 ErcrcqryDataReq51 dataReq = new ErcrcqryDataReq51();
@@ -641,18 +626,15 @@ public class CbsService {
                 pgk.setCheckCode(checkNumUtil.GetCheckSumWithCRC32(pgk.getData()));
                 String xml = XmlUtil.convert2Xml(pgk, "GBK");
 
-//                System.out.println("    5.1请求报文 = ");
-//                System.out.println(xml);
-
+                log.info("    5.1请求报文 = {}", xml);
 
                 //2. 请求接口，获得返回的报文
                 String respStr = httpRequest(cbsConfig.getRequestHttpUrl(), "GET", xml);
 
-                System.out.println("    -------- ");
-                System.out.println("    -------- ");
-                System.out.println("    5.1返回报文为： ");
-                System.out.println("    -------- ");
-                System.out.println(respStr);
+
+                log.info("    5.1返回报文为： ", respStr);
+                log.info("    -------- ");
+
 
                 //3. 把返回报文 解析成  对象
 
@@ -662,46 +644,43 @@ public class CbsService {
 //                System.out.println("返回报文data部分 解析成 对象后，  dataResp = "  + dataResp);
 
 
-                List<Dcdrqryz1> ercurdtlzList = dataResp.getDcdrqryz1List();
-                System.out.println("    5.1返回未过滤 list.size = " + (ercurdtlzList == null? 0:ercurdtlzList.size()));
-                if (!CollectionUtils.isEmpty(ercurdtlzList)) {
+                List<Dcdrqryz1> dcdrqryz1List = dataResp.getDcdrqryz1List();
+                if (dcdrqryz1List == null) dcdrqryz1List = new ArrayList<>();
 
-//                    System.out.println("    列表具体如下： ");
-                    ercurdtlzList.forEach(System.out::println);
-
-                    //过滤掉 BNKFLW 和 ISTNBR为空的
-                    ercurdtlzList = ercurdtlzList
-                            .stream()
-                            .filter(ele -> !StringTools.existEmpty(ele.getIstNbr(), ele.getBnkFlw()))
-                            .collect(Collectors.toList());
-
-                    rltList.addAll(ercurdtlzList);
-                }
+                log.info("    5.1返回未过滤 list.size = {}", dcdrqryz1List.size());
 
 
+                //过滤掉 BNKFLW 和 ISTNBR为空的
+                dcdrqryz1List = dcdrqryz1List
+                        .stream()
+                        .filter(ele -> !StringTools.existEmpty(ele.getIstNbr(), ele.getBnkFlw()))
+                        .collect(Collectors.toList());
+                log.info("    5.1返回的过滤后 list.size = {}", dcdrqryz1List.size());
+
+                rltList.addAll(dcdrqryz1List);
 
                 //更新续传流水号
                 if (dataResp.getDcdrcseqz() == null) {
-//                    System.out.println("    返回报文中没有续传号");
+                    log.info("    5.1返回报文中没有续传号");
                     sqrNb1 = "";
                 } else {
                     sqrNb1 = dataResp.getDcdrcseqz().getSqrNb1();
-//                    System.out.println("    把续传流水号设置为" + sqrNb1);
+                    log.info("    5.1把续传流水号设置为 {}", sqrNb1);
                 }
                 //更新索引
                 ++ batchIndex;
-                System.out.println("-------- ");
-                System.out.println("-------- ");
+                log.info("-------- ");
+                log.info("-------- ");
 
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
         }
 
-        System.out.println("当日电子回单数据 List.size = " + rltList.size());
+        log.info("getTodayDzhd...  当日电子回单数据 最终List.size = {}", rltList.size());
         return rltList;
     }
 
@@ -718,8 +697,6 @@ public class CbsService {
         String[] actNbrArr = actNbrStr.split(",");
 
         for (int i = 0; i < actNbrArr.length; i++) {
-//            System.out.println("*******************************************************");
-//            System.out.println("*******************************************************");
             if (StringUtils.isEmpty(actNbrArr[i])) continue;
 
             //用这个交易账户进行请求
@@ -729,7 +706,7 @@ public class CbsService {
             //若数据量大，则使用续传号持续请求
             while (!StringUtils.isEmpty(dtlSeq)) {
 
-//                System.out.println("actNbr = " + actNbrArr[i] + ", batchIndex = " + batchIndex);
+                log.info("actNbr = {}, batchIndex = {}", actNbrArr[i], batchIndex);
 
                 //1. 生成报文
                 ErcurdtlDataReq28 ercurdtlDataReq = new ErcurdtlDataReq28();
@@ -762,61 +739,52 @@ public class CbsService {
                 pgk.setCheckCode(checkNumUtil.GetCheckSumWithCRC32(pgk.getData()));
                 String xml = XmlUtil.convert2Xml(pgk, "GBK");
 
-//                System.out.println("    2.8请求报文 = ");
-//                System.out.println(xml);
-
+                log.info("    2.8请求报文 = {}", xml);
 
                 //2. 请求接口，获得返回的报文
                 String respStr = httpRequest(cbsConfig.getRequestHttpUrl(), "GET", xml);
-                System.out.println("2.8返回报文= " + respStr);
+                log.info("    2.8返回报文为： ", respStr);
+                log.info("    -------- ");
                 //3. 把返回报文 解析成  对象
 
                 Pgk pgkResp = XmlUtil.convert2JavaBean(respStr, Pgk.class);
 
                 ErcurdtlDataResp28 dataResp = pgkResp.getDataByType(ErcurdtlDataResp28.class);
                 List<Ercurdtlz> ercurdtlzList = dataResp.getErcurdtlzList();
+                if (ercurdtlzList == null) ercurdtlzList = new ArrayList<>();
 
-                System.out.println("    2.8返回未过滤的list.size = " + ercurdtlzList.size());
-//                System.out.println("    列表（未经过滤）具体如下： ");
-//                dataResp.getErcurdtlzList().forEach(System.out::println);
-
+                log.info("    2.8返回未过滤的list.size = {}", ercurdtlzList.size());
 
                 //这里过滤掉不是当天的交易
                 List<Ercurdtlz> ercurdtlzTodayList = ercurdtlzList
                         .stream()
                         .filter(ele ->  DateUtil.isToday(ele.getBnkTim()))
                         .collect(Collectors.toList());
-                System.out.println("    过滤掉不是当天的交易后， todayList.size = " + ercurdtlzTodayList.size());
-                if (ercurdtlzTodayList.size() > 0) {
-//                    System.out.println("todayList  = ");
-//                    ercurdtlzTodayList.forEach(System.out::println);
-                }
-
+                log.info("    2.8过滤掉不是当天的交易后，todayList.size = {}", ercurdtlzTodayList.size());
 
                 rltList.addAll(ercurdtlzTodayList);
 
                 //更新续传流水号
                 if (dataResp.getErdtlseqz() == null) {
-//                    System.out.println("    返回报文中没有续传号");
+                    log.info("    2.8返回报文中没有续传号");
                     dtlSeq = "";
                 } else {
                     dtlSeq = dataResp.getErdtlseqz().getDtlSeq();
-//                    System.out.println("    把续传流水号设置为" + dtlSeq);
+                    log.info("    2.8把续传流水号设置为 {}", dtlSeq);
                 }
                 //更新索引
                 ++ batchIndex;
-//                System.out.println("-------- ");
-//                System.out.println("-------- ");
+
 
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
 
         }
-//        System.out.println("最终rltList.size = " + rltList.size());
+        log.info("最终2.8返回的rltList.size = {}", rltList.size());
         return rltList;
     }
 

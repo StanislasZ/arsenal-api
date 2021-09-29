@@ -28,8 +28,54 @@
     </update>
 
 
-    <select id="getWechatUserList" resultType="com.cmbnb.weChatNotice.modules.wechat.entity.WechatUser">
+    <select id="getWechatUserListByName" resultType="com.cmbnb.weChatNotice.modules.wechat.entity.WechatUser">
         select * from wechat_user
         where name = #{name} and delete_flag = false
     </select>
+
+
+
+    <select id="getWechatUserCnt" resultType="java.lang.Integer">
+        select count(0)
+        from wechat_user
+        <where>
+            <if test="name != null and name != ''">
+                and `name` like '%'|| #{name} ||'%'
+            </if>
+            <if test="wechatId != null and wechatId != ''">
+                and `wechat_id` like '%'|| #{wechatId}||'%'
+            </if>
+            <if test="1==1">
+                and `delete_flag` = false
+            </if>
+        </where>
+    </select>
+
+    <select id="getWechatUserList" resultType="com.cmbnb.weChatNotice.modules.wechat.entity.WechatUser">
+        select * from wechat_user
+        <where>
+            <if test="name != null and name != ''">
+                and `name` like '%'|| #{name} ||'%'
+            </if>
+            <if test="wechatId != null and wechatId != ''">
+                and `wechat_id` like '%'|| #{wechatId}||'%'
+            </if>
+            <if test="1==1">
+                and `delete_flag` = false
+            </if>
+        </where>
+        order by id asc
+        <if test="offSet != null">
+            LIMIT #{offSet}, #{pageRow}
+        </if>
+
+    </select>
+
+    <select id="getWechatUserExportList" resultType="com.cmbnb.weChatNotice.modules.wechat.entity.WechatUser">
+        select * from wechat_user
+        where delete_flag = false
+    </select>
+
+
+
 </mapper>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cmbnb.weChatNotice.modules.clientInfo.mapper.ClientInfoMapper">
+
+    <select id="getClientInfoCnt" resultType="java.lang.Integer">
+        select count(0)
+        from client_info
+        <where>
+            <if test="name != null and name != ''">
+                and `name` like '%'|| #{name} ||'%'
+            </if>
+            <if test="1==1">
+                and `delete_flag` = false
+            </if>
+        </where>
+    </select>
+
+
+    <select id="getClientInfoList" resultType="com.cmbnb.weChatNotice.modules.clientInfo.entity.ClientInfo">
+        select * from client_info
+        <where>
+            <if test="name != null and name != ''">
+                and `name` like '%'|| #{name} ||'%'
+            </if>
+            <if test="1==1">
+                and `delete_flag` = false
+            </if>
+        </where>
+        order by id asc
+        <if test="offSet != null">
+            LIMIT #{offSet}, #{pageRow}
+        </if>
+    </select>
+
+
+    <update id="updateDeleteFlag">
+        update client_info
+        set delete_flag = true
+        where 1=1
+    </update>
+
+    <insert id="insertList">
+        insert into client_info
+        (
+            `name`, `add_date`, `delete_flag`
+        )
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+            #{item.name}, #{item.addDate}, false
+        )
+        </foreach>
+    </insert>
+
+
+    <select id="getExportList"  resultType="com.cmbnb.weChatNotice.modules.clientInfo.entity.ClientInfo">
+        select * from client_info
+        where delete_flag = false
+    </select>
+
+</mapper>

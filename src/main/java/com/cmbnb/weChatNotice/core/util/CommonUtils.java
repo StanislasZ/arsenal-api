@@ -10,7 +10,7 @@ import com.cmbnb.weChatNotice.core.entity.ObjListResp;
 import com.cmbnb.weChatNotice.core.entity.Page;
 import com.cmbnb.weChatNotice.core.util.constants.Constants;
 import com.cmbnb.weChatNotice.core.util.constants.ErrorEnum;
-import com.cmbnt.owk.web.util.Response;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.*;
 
@@ -244,21 +244,6 @@ public class CommonUtils {
     }
 
 
-    //------copy from LiJian
-    /**
-     * 封装 Response
-     * @param supplier
-     * @param <T>
-     * @return
-     */
-    public static <T> Response wrapResponse(Supplier<T> supplier) {
-        try {
-            return new Response(true, supplier.get());
-        } catch (Exception ex){
-            ex.printStackTrace();
-            return new Response(false, "服务器错误!");
-        }
-    }
 
     /**
      * nullTo 用于处理null 值的情况.

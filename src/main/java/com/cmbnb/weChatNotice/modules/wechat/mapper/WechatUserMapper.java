@@ -2,6 +2,7 @@ package com.cmbnb.weChatNotice.modules.wechat.mapper;
 
 
 import com.cmbnb.weChatNotice.modules.wechat.entity.WechatUser;
+import com.cmbnb.weChatNotice.modules.wechat.entity.request.WechatUserQo;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,6 +16,16 @@ public interface WechatUserMapper {
 
     int insertList(List<WechatUser> list);
 
-    List<WechatUser> getWechatUserList(String name);
 
+    //发送消息时，用
+    List<WechatUser> getWechatUserListByName(String name);
+
+
+    int getWechatUserCnt(WechatUserQo qo);
+
+    //前端用
+    List<WechatUser> getWechatUserList(WechatUserQo qo);
+
+
+    List<WechatUser> getWechatUserExportList();
 }

@@ -8,6 +8,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import java.math.BigDecimal;
 
+/**
+ * 2.8 返回部分
+ */
 @Data
 @XmlAccessorType(value = XmlAccessType.FIELD)
 public class Ercurdtlz {
@@ -67,4 +70,10 @@ public class Ercurdtlz {
 
     @XmlElement(name = "BNKNBR")
     private String bnkNbr;  //银行号
+
+    @XmlElement(name = "MONTYP")
+    private String monTyp;  //款项性质，用于过滤收款
+
+    @XmlElement(name = "OTHNAM")
+    private String othNam;  //对方户名
 }

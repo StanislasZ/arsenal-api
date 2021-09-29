@@ -14,8 +14,8 @@ public class DateTest {
 
 
 
-//        String s = "2021-09-17 16:21:31.0";
-        String s = "  ";
+        String s = "2021-09-17 16:21:31.0";
+//        String s = "  ";
 
         System.out.println(DateUtil.isToday(s));
 

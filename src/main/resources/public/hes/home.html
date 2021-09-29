@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>海尔施-cbs对接企业微信-信息维护</title>
+
+    <link rel="stylesheet" href="../assets/elementui/index.css">
+    <script type="text/javascript" src="../assets/js/vue.min.js"></script>
+    <script type="text/javascript" src="../assets/elementui/index.js"></script>
+    <script type="text/javascript" src="../assets/js/qs.min.js"></script>
+    <script type="text/javascript" src="../assets/js/axios.min.js"></script>
+</head>
+<body>
+
+<div id="app">
+
+
+    <div style="width: 200px;overflow-y:scroll">
+      <el-menu
+              default-active="2"
+              class="el-menu-vertical-demo"
+              @open="handleOpen"
+              @close="handleClose"
+              background-color="#545c64"
+              text-color="#fff"
+              active-text-color="#ffd04b">
+
+        <el-menu-item index="1">
+          <i class="el-icon-menu"></i>
+          <span slot="title">微信通知用户维护</span>
+        </el-menu-item>
+        <el-menu-item index="2">
+          <i class="el-icon-document"></i>
+          <span slot="title">客户信息维护</span>
+        </el-menu-item>
+
+      </el-menu>
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+</div>
+<script src="./api.js"></script>
+<script src="./home.js"></script>
+</body>
+</html>

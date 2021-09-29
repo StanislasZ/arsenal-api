@@ -4,6 +4,8 @@ package com.cmbnb.weChatNotice.core.controller;
 import com.alibaba.excel.EasyExcel;
 
 
+import com.cmbnb.weChatNotice.modules.clientInfo.entity.ClientInfo;
+import com.cmbnb.weChatNotice.modules.wechat.entity.WechatUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -25,23 +27,27 @@ public class ExcelController {
     private static final Logger LOGGER = LoggerFactory.getLogger(ExcelController.class);
 
 
-//    @GetMapping("/dlTemplate/{name}")
-//    public void dlTemplate(@PathVariable("name") String name,
-//                           @RequestParam("matchFlag") String matchFlag,
-//                           HttpServletResponse response) throws IOException {
-//        LOGGER.info("name = {}", name);
-//        LOGGER.info("matchFlag = {}", matchFlag);
-//        response.setContentType("application/vnd.ms-excel");
-//        response.setCharacterEncoding("utf-8");
-//        String fileName = "";
-//        Class clazz = null;
-//        List list = null;
-//        if (name.equals("QY")) {
-//            fileName = URLEncoder.encode("抵押信息请求模板", "UTF-8").replaceAll("\\+", "%20");
-//            clazz = Qy.class;
-//            list = new ArrayList();
-//        }
-//        response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
-//        EasyExcel.write(response.getOutputStream(), clazz).sheet("Sheet1").doWrite(list);
-//    }
+    @GetMapping("/dlTemplate/{name}")
+    public void dlTemplate(@PathVariable("name") String name,
+                           HttpServletResponse response) throws IOException {
+        LOGGER.info("name = {}", name);
+        response.setContentType("application/vnd.ms-excel");
+        response.setCharacterEncoding("utf-8");
+        String fileName = "";
+        Class clazz = null;
+        List list = null;
+        if (name.equals("WECHATUSER")) {
+            fileName = URLEncoder.encode("微信通知人员", "UTF-8").replaceAll("\\+", "%20");
+            clazz = WechatUser.class;
+            list = new ArrayList();
+        } else if (name.equals("CLIENTINFO")) {
+            fileName = URLEncoder.encode("客户名单", "UTF-8").replaceAll("\\+", "%20");
+            clazz = ClientInfo.class;
+            list = new ArrayList();
+
+        }
+
+        response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
+        EasyExcel.write(response.getOutputStream(), clazz).sheet("Sheet1").doWrite(list);
+    }
 }

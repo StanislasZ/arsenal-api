@@ -5,7 +5,7 @@ package com.cmbnb.weChatNotice;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.cmbnb.weChatNotice.core.util.CommonUtils;
-import com.cmbnb.weChatNotice.core.util.EncUtils;
+
 
 import com.cmbnb.weChatNotice.core.util.FileUtils;
 import com.cmbnb.weChatNotice.core.util.restTemplate.RestTemplateUtils;
@@ -62,8 +62,7 @@ import java.util.stream.Collectors;
 public class HesCorpWeChatNoticeApiApplicationTests {
 
 
-    @Autowired
-    EncUtils encUtils;
+
 
     @Autowired
     CronTaskRegistrar cronTaskRegistrar;
@@ -99,8 +98,7 @@ public class HesCorpWeChatNoticeApiApplicationTests {
 //    @Value("${ksxt.msg.mngUser:295461}")
 //    private String mngUser;
 
-    @Value("${config.fkCron}")
-    private String fkCron;
+
 
 
     @Test
@@ -110,14 +108,7 @@ public class HesCorpWeChatNoticeApiApplicationTests {
     }
 
 
-    @Test
-    public void testTask() throws InterruptedException {
-        SchedulingRunnable task = new SchedulingRunnable("cbsService", "taskNoParams", null);
-        cronTaskRegistrar.addCronTask(task, fkCron);
 
-        // 便于观察
-        Thread.sleep(3000000);
-    }
 
 
 

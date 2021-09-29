@@ -19,26 +19,8 @@ public class TaskController {
     @Autowired
     CronTaskRegistrar cronTaskRegistrar;
 
-    @Value("${config.fkCron}")
-    private String fkCron;
 
-    @RequestMapping("/testCron")
-    public JSONObject testCron() {
 
-        SchedulingRunnable task = new SchedulingRunnable("cbsService", "taskNoParams", null);
-        cronTaskRegistrar.addCronTask(task, fkCron);
-
-        return CommonUtils.successJson();
-    }
-
-    @RequestMapping("/testCron2")
-    public JSONObject testCron2() {
-
-        SchedulingRunnable task = new SchedulingRunnable("cbsService", "taskNoParams2", null);
-        cronTaskRegistrar.addCronTask(task, fkCron);
-
-        return CommonUtils.successJson();
-    }
 
     @RequestMapping("/clearAllTask")
     public JSONObject clearAllTask() {

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>微信通知用户维护</title>
+
+    <link rel="stylesheet" href="../assets/elementui/index.css">
+    <script type="text/javascript" src="../assets/js/vue.min.js"></script>
+    <script type="text/javascript" src="../assets/elementui/index.js"></script>
+    <script type="text/javascript" src="../assets/js/qs.min.js"></script>
+    <script type="text/javascript" src="../assets/js/axios.min.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <div class="filter-container">
+
+
+        <el-form :inline="true" >
+            <el-form-item>
+                <el-input
+                        v-model="listQuery.name"
+                        placeholder="姓名"
+                        clearable
+                        style="width: 200px;"
+                        class="filter-item" />
+            </el-form-item>
+            <el-form-item>
+                <el-input
+                        v-model="listQuery.wechatId"
+                        placeholder="企业微信id"
+                        clearable
+                        style="width: 200px;"
+                        class="filter-item" />
+            </el-form-item>
+        </el-form>
+
+        <div style="margin-bottom: 10px;">
+            <el-button type="primary" icon="el-icon-plus"
+                       @click="dlTemplate">批量导入模板下载
+            </el-button>
+
+            <el-button type="primary" icon="el-icon-plus"
+                       @click="showUploadDialog">导入
+            </el-button>
+
+            <el-button type="primary" icon="el-icon-download"
+                       @click="exportExcel">导出
+            </el-button>
+        </div>
+
+
+    </div>
+
+
+    <el-table
+            :data="list" v-loading.body="listLoading" element-loading-text="拼命加载中"
+            border fit highlight-current-row
+            :header-cell-style="{'background':'#f2f3f4', 'color':'#555', 'font-weight':'bold', 'line-height':'32px'}"
+
+    >
+
+
+        <el-table-column align="center" label="姓名" prop="name"></el-table-column>
+        <el-table-column align="center" label="企业微信id" prop="wechatId"></el-table-column>
+
+
+
+    </el-table>
+    <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="listQuery.pageNum"
+            :page-size="listQuery.pageRow"
+            :total="totalCount"
+            :page-sizes="[2, 10, 20, 50, 100]"
+            layout="total, sizes, prev, pager, next, jumper">
+    </el-pagination>
+
+
+    <el-dialog :title="uploadDialog.title" :visible.sync="uploadDialog.visible" class="uploadDialog">
+
+        <span style="font-size: large; font-weight: bold; color:red">
+            注意：上传成功后，旧数据全部删除，仅保留上传文件内的数据(全部替换成现在的)
+        </span>
+
+
+        <el-upload
+                :action="uploadDialog.uploadUrl"
+                :on-success="onFileUploadSuccess"
+                :on-remove="handleFileRemove"
+                multiple
+                name="file"
+                :limit="1"
+                :file-list="uploadDialog.fileList">
+            <el-button size="small" type="primary">点击上传</el-button>
+            <div slot="tip" class="el-upload__tip">只能上传.xlsx文件，且不超过500kb</div>
+        </el-upload>
+
+
+    </el-dialog>
+
+
+</div>
+<script src="./api.js"></script>
+<script src="./wechatUser.js"></script>
+
+
+</body>
+</html>
