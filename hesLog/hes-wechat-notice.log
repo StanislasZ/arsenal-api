@@ -10908,3 +10908,1627 @@ Unconditional classes:
 2021-09-29 16:30:03.752 [ TaskSchedulerThreadPool-2 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 145 ] - 过滤付款后，（借贷方向=1，存在银行流水号且不再今日已发送里，存在支付流水号） todayDetailSkList 付款 List.size = 0
 2021-09-29 16:30:03.752 [ TaskSchedulerThreadPool-2 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 149 ] - 今天到现在，过滤后的 收付款 列表 都为空
 2021-09-29 16:30:03.752 [ TaskSchedulerThreadPool-2 ] - [ INFO  ] [ c.c.w.modules.task.application.SchedulingRunnable : 65 ] - 定时任务执行结束 - bean：cbsService，方法：handleTodayDetailAndNotice，参数：null，耗时：3746 毫秒
+2021-09-29 16:35:00.005 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.w.modules.task.application.SchedulingRunnable : 37 ] - 定时任务开始执行 - bean：cbsService，方法：handleTodayDetailAndNotice，参数：null
+2021-09-29 16:35:00.005 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 114 ] - handleTodayDetailAndNotice....
+2021-09-29 16:35:00.005 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - Creating a new SqlSession
+2021-09-29 16:35:00.005 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@29290eef] was not registered for synchronization because synchronization is not active
+2021-09-29 16:35:00.005 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.springframework.jdbc.datasource.DataSourceUtils : 115 ] - Fetching JDBC Connection from DataSource
+2021-09-29 16:35:00.006 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.m.spring.transaction.SpringManagedTransaction : 49 ] - JDBC Connection [org.sqlite.jdbc4.JDBC4Connection@5cd5fb7c] will not be managed by Spring
+2021-09-29 16:35:00.006 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - ==>  Preparing: select distinct bnk_flw from dzhd_send_record where send_date = current_date and bnk_flw is not null and bnk_flw != ''
+2021-09-29 16:35:00.006 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - ==> Parameters: 
+2021-09-29 16:35:00.006 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - <==      Total: 0
+2021-09-29 16:35:00.007 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@29290eef]
+2021-09-29 16:35:00.007 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 118 ] - todaySendBnkFlwList = []
+2021-09-29 16:35:00.007 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 591915131410208, batchIndex = 0
+2021-09-29 16:35:00.011 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>591915131410208</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>ZDC5FA955</CHECKCODE>
+</PGK>
+
+2021-09-29 16:35:00.758 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 16:35:00.758 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 16:35:00.766 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 60
+2021-09-29 16:35:00.768 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 7
+2021-09-29 16:35:00.768 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 16:35:01.268 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 310899991010008776083, batchIndex = 0
+2021-09-29 16:35:01.270 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>310899991010008776083</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>Z625516C9</CHECKCODE>
+</PGK>
+
+2021-09-29 16:35:01.754 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 16:35:01.754 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 16:35:01.758 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 29
+2021-09-29 16:35:01.759 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 16:35:01.759 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 16:35:02.260 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 755915678910506, batchIndex = 0
+2021-09-29 16:35:02.263 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>755915678910506</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>ZDD9D36F9</CHECKCODE>
+</PGK>
+
+2021-09-29 16:35:02.361 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 16:35:02.362 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 16:35:02.365 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 0
+2021-09-29 16:35:02.365 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 16:35:02.365 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 16:35:02.866 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 755915678910202, batchIndex = 0
+2021-09-29 16:35:02.868 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>755915678910202</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>Z6B8EEB50</CHECKCODE>
+</PGK>
+
+2021-09-29 16:35:02.968 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 16:35:02.968 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 16:35:02.972 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 0
+2021-09-29 16:35:02.972 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 16:35:02.972 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 16:35:03.473 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 787 ] - 最终2.8返回的rltList.size = 7
+2021-09-29 16:35:03.473 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 144 ] - 过滤收款后，（借贷方向=2，存在银行流水号且不再今日已发送里，款项类型为货款） todayDetailSkList 收款 List.size = 0
+2021-09-29 16:35:03.473 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 145 ] - 过滤付款后，（借贷方向=1，存在银行流水号且不再今日已发送里，存在支付流水号） todayDetailSkList 付款 List.size = 0
+2021-09-29 16:35:03.473 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 149 ] - 今天到现在，过滤后的 收付款 列表 都为空
+2021-09-29 16:35:03.473 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.w.modules.task.application.SchedulingRunnable : 65 ] - 定时任务执行结束 - bean：cbsService，方法：handleTodayDetailAndNotice，参数：null，耗时：3468 毫秒
+2021-09-29 16:40:00.004 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.w.modules.task.application.SchedulingRunnable : 37 ] - 定时任务开始执行 - bean：cbsService，方法：handleTodayDetailAndNotice，参数：null
+2021-09-29 16:40:00.004 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 114 ] - handleTodayDetailAndNotice....
+2021-09-29 16:40:00.004 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - Creating a new SqlSession
+2021-09-29 16:40:00.004 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3fa65aab] was not registered for synchronization because synchronization is not active
+2021-09-29 16:40:00.004 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.springframework.jdbc.datasource.DataSourceUtils : 115 ] - Fetching JDBC Connection from DataSource
+2021-09-29 16:40:00.005 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.m.spring.transaction.SpringManagedTransaction : 49 ] - JDBC Connection [org.sqlite.jdbc4.JDBC4Connection@5cd5fb7c] will not be managed by Spring
+2021-09-29 16:40:00.005 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - ==>  Preparing: select distinct bnk_flw from dzhd_send_record where send_date = current_date and bnk_flw is not null and bnk_flw != ''
+2021-09-29 16:40:00.005 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - ==> Parameters: 
+2021-09-29 16:40:00.006 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - <==      Total: 0
+2021-09-29 16:40:00.006 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3fa65aab]
+2021-09-29 16:40:00.006 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 118 ] - todaySendBnkFlwList = []
+2021-09-29 16:40:00.006 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 591915131410208, batchIndex = 0
+2021-09-29 16:40:00.009 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>591915131410208</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>ZDC5FA955</CHECKCODE>
+</PGK>
+
+2021-09-29 16:40:00.761 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 16:40:00.761 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 16:40:00.767 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 60
+2021-09-29 16:40:00.768 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 7
+2021-09-29 16:40:00.768 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 16:40:01.268 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 310899991010008776083, batchIndex = 0
+2021-09-29 16:40:01.270 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>310899991010008776083</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>Z625516C9</CHECKCODE>
+</PGK>
+
+2021-09-29 16:40:01.783 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 16:40:01.783 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 16:40:01.788 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 29
+2021-09-29 16:40:01.788 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 16:40:01.788 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 16:40:02.288 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 755915678910506, batchIndex = 0
+2021-09-29 16:40:02.290 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>755915678910506</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>ZDD9D36F9</CHECKCODE>
+</PGK>
+
+2021-09-29 16:40:02.395 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 16:40:02.395 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 16:40:02.398 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 0
+2021-09-29 16:40:02.398 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 16:40:02.398 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 16:40:02.899 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 755915678910202, batchIndex = 0
+2021-09-29 16:40:02.901 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>755915678910202</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>Z6B8EEB50</CHECKCODE>
+</PGK>
+
+2021-09-29 16:40:02.998 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 16:40:02.998 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 16:40:03.002 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 0
+2021-09-29 16:40:03.002 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 16:40:03.002 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 16:40:03.502 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 787 ] - 最终2.8返回的rltList.size = 7
+2021-09-29 16:40:03.502 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 144 ] - 过滤收款后，（借贷方向=2，存在银行流水号且不再今日已发送里，款项类型为货款） todayDetailSkList 收款 List.size = 0
+2021-09-29 16:40:03.502 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 145 ] - 过滤付款后，（借贷方向=1，存在银行流水号且不再今日已发送里，存在支付流水号） todayDetailSkList 付款 List.size = 0
+2021-09-29 16:40:03.502 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 149 ] - 今天到现在，过滤后的 收付款 列表 都为空
+2021-09-29 16:40:03.502 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.w.modules.task.application.SchedulingRunnable : 65 ] - 定时任务执行结束 - bean：cbsService，方法：handleTodayDetailAndNotice，参数：null，耗时：3498 毫秒
+2021-09-29 16:45:00.005 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.w.modules.task.application.SchedulingRunnable : 37 ] - 定时任务开始执行 - bean：cbsService，方法：handleTodayDetailAndNotice，参数：null
+2021-09-29 16:45:00.005 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 114 ] - handleTodayDetailAndNotice....
+2021-09-29 16:45:00.005 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - Creating a new SqlSession
+2021-09-29 16:45:00.005 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1a3a71ac] was not registered for synchronization because synchronization is not active
+2021-09-29 16:45:00.006 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.springframework.jdbc.datasource.DataSourceUtils : 115 ] - Fetching JDBC Connection from DataSource
+2021-09-29 16:45:00.006 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.m.spring.transaction.SpringManagedTransaction : 49 ] - JDBC Connection [org.sqlite.jdbc4.JDBC4Connection@5cd5fb7c] will not be managed by Spring
+2021-09-29 16:45:00.006 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - ==>  Preparing: select distinct bnk_flw from dzhd_send_record where send_date = current_date and bnk_flw is not null and bnk_flw != ''
+2021-09-29 16:45:00.007 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - ==> Parameters: 
+2021-09-29 16:45:00.007 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - <==      Total: 0
+2021-09-29 16:45:00.008 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1a3a71ac]
+2021-09-29 16:45:00.008 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 118 ] - todaySendBnkFlwList = []
+2021-09-29 16:45:00.008 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 591915131410208, batchIndex = 0
+2021-09-29 16:45:00.010 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>591915131410208</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>ZDC5FA955</CHECKCODE>
+</PGK>
+
+2021-09-29 16:45:00.841 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 16:45:00.842 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 16:45:00.847 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 60
+2021-09-29 16:45:00.848 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 7
+2021-09-29 16:45:00.849 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 16:45:01.349 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 310899991010008776083, batchIndex = 0
+2021-09-29 16:45:01.351 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>310899991010008776083</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>Z625516C9</CHECKCODE>
+</PGK>
+
+2021-09-29 16:45:01.909 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 16:45:01.910 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 16:45:01.914 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 29
+2021-09-29 16:45:01.914 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 16:45:01.914 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 16:45:02.415 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 755915678910506, batchIndex = 0
+2021-09-29 16:45:02.416 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>755915678910506</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>ZDD9D36F9</CHECKCODE>
+</PGK>
+
+2021-09-29 16:45:02.506 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 16:45:02.507 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 16:45:02.509 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 0
+2021-09-29 16:45:02.510 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 16:45:02.510 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 16:45:03.011 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 755915678910202, batchIndex = 0
+2021-09-29 16:45:03.013 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>755915678910202</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>Z6B8EEB50</CHECKCODE>
+</PGK>
+
+2021-09-29 16:45:03.112 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 16:45:03.112 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 16:45:03.115 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 0
+2021-09-29 16:45:03.115 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 16:45:03.115 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 16:45:03.615 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 787 ] - 最终2.8返回的rltList.size = 7
+2021-09-29 16:45:03.615 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 144 ] - 过滤收款后，（借贷方向=2，存在银行流水号且不再今日已发送里，款项类型为货款） todayDetailSkList 收款 List.size = 0
+2021-09-29 16:45:03.615 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 145 ] - 过滤付款后，（借贷方向=1，存在银行流水号且不再今日已发送里，存在支付流水号） todayDetailSkList 付款 List.size = 0
+2021-09-29 16:45:03.615 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 149 ] - 今天到现在，过滤后的 收付款 列表 都为空
+2021-09-29 16:45:03.615 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.w.modules.task.application.SchedulingRunnable : 65 ] - 定时任务执行结束 - bean：cbsService，方法：handleTodayDetailAndNotice，参数：null，耗时：3610 毫秒
+2021-09-29 16:50:00.005 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.w.modules.task.application.SchedulingRunnable : 37 ] - 定时任务开始执行 - bean：cbsService，方法：handleTodayDetailAndNotice，参数：null
+2021-09-29 16:50:00.005 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 114 ] - handleTodayDetailAndNotice....
+2021-09-29 16:50:00.005 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - Creating a new SqlSession
+2021-09-29 16:50:00.005 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5b170810] was not registered for synchronization because synchronization is not active
+2021-09-29 16:50:00.006 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.springframework.jdbc.datasource.DataSourceUtils : 115 ] - Fetching JDBC Connection from DataSource
+2021-09-29 16:50:00.006 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.m.spring.transaction.SpringManagedTransaction : 49 ] - JDBC Connection [org.sqlite.jdbc4.JDBC4Connection@5cd5fb7c] will not be managed by Spring
+2021-09-29 16:50:00.006 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - ==>  Preparing: select distinct bnk_flw from dzhd_send_record where send_date = current_date and bnk_flw is not null and bnk_flw != ''
+2021-09-29 16:50:00.006 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - ==> Parameters: 
+2021-09-29 16:50:00.007 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - <==      Total: 0
+2021-09-29 16:50:00.007 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5b170810]
+2021-09-29 16:50:00.007 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 118 ] - todaySendBnkFlwList = []
+2021-09-29 16:50:00.007 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 591915131410208, batchIndex = 0
+2021-09-29 16:50:00.009 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>591915131410208</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>ZDC5FA955</CHECKCODE>
+</PGK>
+
+2021-09-29 16:50:00.897 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 16:50:00.897 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 16:50:00.903 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 60
+2021-09-29 16:50:00.904 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 7
+2021-09-29 16:50:00.904 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 16:50:01.405 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 310899991010008776083, batchIndex = 0
+2021-09-29 16:50:01.406 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>310899991010008776083</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>Z625516C9</CHECKCODE>
+</PGK>
+
+2021-09-29 16:50:02.076 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 16:50:02.076 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 16:50:02.080 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 29
+2021-09-29 16:50:02.081 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 16:50:02.081 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 16:50:02.581 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 755915678910506, batchIndex = 0
+2021-09-29 16:50:02.583 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>755915678910506</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>ZDD9D36F9</CHECKCODE>
+</PGK>
+
+2021-09-29 16:50:02.676 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 16:50:02.676 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 16:50:02.679 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 0
+2021-09-29 16:50:02.679 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 16:50:02.679 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 16:50:03.179 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 755915678910202, batchIndex = 0
+2021-09-29 16:50:03.180 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>755915678910202</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>Z6B8EEB50</CHECKCODE>
+</PGK>
+
+2021-09-29 16:50:03.269 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 16:50:03.269 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 16:50:03.271 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 0
+2021-09-29 16:50:03.271 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 16:50:03.271 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 16:50:03.772 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 787 ] - 最终2.8返回的rltList.size = 7
+2021-09-29 16:50:03.772 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 144 ] - 过滤收款后，（借贷方向=2，存在银行流水号且不再今日已发送里，款项类型为货款） todayDetailSkList 收款 List.size = 0
+2021-09-29 16:50:03.772 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 145 ] - 过滤付款后，（借贷方向=1，存在银行流水号且不再今日已发送里，存在支付流水号） todayDetailSkList 付款 List.size = 0
+2021-09-29 16:50:03.772 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 149 ] - 今天到现在，过滤后的 收付款 列表 都为空
+2021-09-29 16:50:03.772 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.w.modules.task.application.SchedulingRunnable : 65 ] - 定时任务执行结束 - bean：cbsService，方法：handleTodayDetailAndNotice，参数：null，耗时：3767 毫秒
+2021-09-29 16:55:00.004 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.w.modules.task.application.SchedulingRunnable : 37 ] - 定时任务开始执行 - bean：cbsService，方法：handleTodayDetailAndNotice，参数：null
+2021-09-29 16:55:00.004 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 114 ] - handleTodayDetailAndNotice....
+2021-09-29 16:55:00.004 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - Creating a new SqlSession
+2021-09-29 16:55:00.004 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5d66609a] was not registered for synchronization because synchronization is not active
+2021-09-29 16:55:00.004 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.springframework.jdbc.datasource.DataSourceUtils : 115 ] - Fetching JDBC Connection from DataSource
+2021-09-29 16:55:00.004 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.m.spring.transaction.SpringManagedTransaction : 49 ] - JDBC Connection [org.sqlite.jdbc4.JDBC4Connection@5cd5fb7c] will not be managed by Spring
+2021-09-29 16:55:00.005 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - ==>  Preparing: select distinct bnk_flw from dzhd_send_record where send_date = current_date and bnk_flw is not null and bnk_flw != ''
+2021-09-29 16:55:00.005 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - ==> Parameters: 
+2021-09-29 16:55:00.005 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - <==      Total: 0
+2021-09-29 16:55:00.005 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5d66609a]
+2021-09-29 16:55:00.005 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 118 ] - todaySendBnkFlwList = []
+2021-09-29 16:55:00.005 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 591915131410208, batchIndex = 0
+2021-09-29 16:55:00.008 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>591915131410208</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>ZDC5FA955</CHECKCODE>
+</PGK>
+
+2021-09-29 16:55:00.802 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 16:55:00.802 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 16:55:00.807 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 60
+2021-09-29 16:55:00.808 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 7
+2021-09-29 16:55:00.808 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 16:55:01.308 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 310899991010008776083, batchIndex = 0
+2021-09-29 16:55:01.309 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>310899991010008776083</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>Z625516C9</CHECKCODE>
+</PGK>
+
+2021-09-29 16:55:01.760 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 16:55:01.760 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 16:55:01.764 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 29
+2021-09-29 16:55:01.764 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 16:55:01.764 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 16:55:02.265 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 755915678910506, batchIndex = 0
+2021-09-29 16:55:02.266 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>755915678910506</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>ZDD9D36F9</CHECKCODE>
+</PGK>
+
+2021-09-29 16:55:02.353 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 16:55:02.353 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 16:55:02.356 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 0
+2021-09-29 16:55:02.356 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 16:55:02.356 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 16:55:02.856 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 755915678910202, batchIndex = 0
+2021-09-29 16:55:02.857 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>755915678910202</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>Z6B8EEB50</CHECKCODE>
+</PGK>
+
+2021-09-29 16:55:02.949 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 16:55:02.949 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 16:55:02.952 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 0
+2021-09-29 16:55:02.952 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 16:55:02.952 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 16:55:03.452 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 787 ] - 最终2.8返回的rltList.size = 7
+2021-09-29 16:55:03.452 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 144 ] - 过滤收款后，（借贷方向=2，存在银行流水号且不再今日已发送里，款项类型为货款） todayDetailSkList 收款 List.size = 0
+2021-09-29 16:55:03.452 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 145 ] - 过滤付款后，（借贷方向=1，存在银行流水号且不再今日已发送里，存在支付流水号） todayDetailSkList 付款 List.size = 0
+2021-09-29 16:55:03.452 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 149 ] - 今天到现在，过滤后的 收付款 列表 都为空
+2021-09-29 16:55:03.452 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.w.modules.task.application.SchedulingRunnable : 65 ] - 定时任务执行结束 - bean：cbsService，方法：handleTodayDetailAndNotice，参数：null，耗时：3448 毫秒
+2021-09-29 17:00:00.003 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.w.modules.task.application.SchedulingRunnable : 37 ] - 定时任务开始执行 - bean：cbsService，方法：handleTodayDetailAndNotice，参数：null
+2021-09-29 17:00:00.003 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 114 ] - handleTodayDetailAndNotice....
+2021-09-29 17:00:00.003 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - Creating a new SqlSession
+2021-09-29 17:00:00.003 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2878203f] was not registered for synchronization because synchronization is not active
+2021-09-29 17:00:00.003 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.springframework.jdbc.datasource.DataSourceUtils : 115 ] - Fetching JDBC Connection from DataSource
+2021-09-29 17:00:00.004 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.m.spring.transaction.SpringManagedTransaction : 49 ] - JDBC Connection [org.sqlite.jdbc4.JDBC4Connection@5cd5fb7c] will not be managed by Spring
+2021-09-29 17:00:00.004 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - ==>  Preparing: select distinct bnk_flw from dzhd_send_record where send_date = current_date and bnk_flw is not null and bnk_flw != ''
+2021-09-29 17:00:00.004 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - ==> Parameters: 
+2021-09-29 17:00:00.004 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - <==      Total: 0
+2021-09-29 17:00:00.004 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2878203f]
+2021-09-29 17:00:00.004 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 118 ] - todaySendBnkFlwList = []
+2021-09-29 17:00:00.005 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 591915131410208, batchIndex = 0
+2021-09-29 17:00:00.006 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>591915131410208</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>ZDC5FA955</CHECKCODE>
+</PGK>
+
+2021-09-29 17:00:00.739 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 17:00:00.739 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 17:00:00.744 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 60
+2021-09-29 17:00:00.745 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 7
+2021-09-29 17:00:00.745 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 17:00:01.245 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 310899991010008776083, batchIndex = 0
+2021-09-29 17:00:01.247 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>310899991010008776083</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>Z625516C9</CHECKCODE>
+</PGK>
+
+2021-09-29 17:00:01.701 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 17:00:01.701 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 17:00:01.705 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 29
+2021-09-29 17:00:01.705 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 17:00:01.705 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 17:00:02.205 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 755915678910506, batchIndex = 0
+2021-09-29 17:00:02.206 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>755915678910506</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>ZDD9D36F9</CHECKCODE>
+</PGK>
+
+2021-09-29 17:00:02.294 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 17:00:02.294 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 17:00:02.296 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 0
+2021-09-29 17:00:02.297 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 17:00:02.297 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 17:00:02.797 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 755915678910202, batchIndex = 0
+2021-09-29 17:00:02.798 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>755915678910202</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>Z6B8EEB50</CHECKCODE>
+</PGK>
+
+2021-09-29 17:00:02.884 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 17:00:02.884 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 17:00:02.887 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 0
+2021-09-29 17:00:02.887 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 17:00:02.887 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 17:00:03.387 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 787 ] - 最终2.8返回的rltList.size = 7
+2021-09-29 17:00:03.387 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 144 ] - 过滤收款后，（借贷方向=2，存在银行流水号且不再今日已发送里，款项类型为货款） todayDetailSkList 收款 List.size = 0
+2021-09-29 17:00:03.387 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 145 ] - 过滤付款后，（借贷方向=1，存在银行流水号且不再今日已发送里，存在支付流水号） todayDetailSkList 付款 List.size = 0
+2021-09-29 17:00:03.387 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 149 ] - 今天到现在，过滤后的 收付款 列表 都为空
+2021-09-29 17:00:03.387 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.w.modules.task.application.SchedulingRunnable : 65 ] - 定时任务执行结束 - bean：cbsService，方法：handleTodayDetailAndNotice，参数：null，耗时：3384 毫秒
+2021-09-29 17:05:00.003 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.w.modules.task.application.SchedulingRunnable : 37 ] - 定时任务开始执行 - bean：cbsService，方法：handleTodayDetailAndNotice，参数：null
+2021-09-29 17:05:00.003 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 114 ] - handleTodayDetailAndNotice....
+2021-09-29 17:05:00.003 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - Creating a new SqlSession
+2021-09-29 17:05:00.003 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5f3516ab] was not registered for synchronization because synchronization is not active
+2021-09-29 17:05:00.003 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.springframework.jdbc.datasource.DataSourceUtils : 115 ] - Fetching JDBC Connection from DataSource
+2021-09-29 17:05:00.003 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.m.spring.transaction.SpringManagedTransaction : 49 ] - JDBC Connection [org.sqlite.jdbc4.JDBC4Connection@5cd5fb7c] will not be managed by Spring
+2021-09-29 17:05:00.004 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - ==>  Preparing: select distinct bnk_flw from dzhd_send_record where send_date = current_date and bnk_flw is not null and bnk_flw != ''
+2021-09-29 17:05:00.004 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - ==> Parameters: 
+2021-09-29 17:05:00.004 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - <==      Total: 0
+2021-09-29 17:05:00.004 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5f3516ab]
+2021-09-29 17:05:00.004 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 118 ] - todaySendBnkFlwList = []
+2021-09-29 17:05:00.004 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 591915131410208, batchIndex = 0
+2021-09-29 17:05:00.006 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>591915131410208</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>ZDC5FA955</CHECKCODE>
+</PGK>
+
+2021-09-29 17:05:00.749 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 17:05:00.749 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 17:05:00.754 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 60
+2021-09-29 17:05:00.755 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 7
+2021-09-29 17:05:00.755 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 17:05:01.255 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 310899991010008776083, batchIndex = 0
+2021-09-29 17:05:01.256 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>310899991010008776083</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>Z625516C9</CHECKCODE>
+</PGK>
+
+2021-09-29 17:05:01.686 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 17:05:01.686 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 17:05:01.690 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 29
+2021-09-29 17:05:01.690 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 17:05:01.690 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 17:05:02.191 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 755915678910506, batchIndex = 0
+2021-09-29 17:05:02.192 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>755915678910506</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>ZDD9D36F9</CHECKCODE>
+</PGK>
+
+2021-09-29 17:05:02.297 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 17:05:02.298 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 17:05:02.300 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 0
+2021-09-29 17:05:02.300 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 17:05:02.301 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 17:05:02.802 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 755915678910202, batchIndex = 0
+2021-09-29 17:05:02.803 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>755915678910202</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>Z6B8EEB50</CHECKCODE>
+</PGK>
+
+2021-09-29 17:05:02.907 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 17:05:02.907 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 17:05:02.910 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 0
+2021-09-29 17:05:02.910 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 17:05:02.910 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 17:05:03.411 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 787 ] - 最终2.8返回的rltList.size = 7
+2021-09-29 17:05:03.411 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 144 ] - 过滤收款后，（借贷方向=2，存在银行流水号且不再今日已发送里，款项类型为货款） todayDetailSkList 收款 List.size = 0
+2021-09-29 17:05:03.411 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 145 ] - 过滤付款后，（借贷方向=1，存在银行流水号且不再今日已发送里，存在支付流水号） todayDetailSkList 付款 List.size = 0
+2021-09-29 17:05:03.411 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 149 ] - 今天到现在，过滤后的 收付款 列表 都为空
+2021-09-29 17:05:03.411 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.w.modules.task.application.SchedulingRunnable : 65 ] - 定时任务执行结束 - bean：cbsService，方法：handleTodayDetailAndNotice，参数：null，耗时：3408 毫秒
+2021-09-29 17:10:00.003 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.w.modules.task.application.SchedulingRunnable : 37 ] - 定时任务开始执行 - bean：cbsService，方法：handleTodayDetailAndNotice，参数：null
+2021-09-29 17:10:00.003 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 114 ] - handleTodayDetailAndNotice....
+2021-09-29 17:10:00.003 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - Creating a new SqlSession
+2021-09-29 17:10:00.003 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@34c7f3e5] was not registered for synchronization because synchronization is not active
+2021-09-29 17:10:00.003 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.springframework.jdbc.datasource.DataSourceUtils : 115 ] - Fetching JDBC Connection from DataSource
+2021-09-29 17:10:00.003 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.m.spring.transaction.SpringManagedTransaction : 49 ] - JDBC Connection [org.sqlite.jdbc4.JDBC4Connection@5cd5fb7c] will not be managed by Spring
+2021-09-29 17:10:00.004 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - ==>  Preparing: select distinct bnk_flw from dzhd_send_record where send_date = current_date and bnk_flw is not null and bnk_flw != ''
+2021-09-29 17:10:00.004 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - ==> Parameters: 
+2021-09-29 17:10:00.004 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - <==      Total: 0
+2021-09-29 17:10:00.004 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@34c7f3e5]
+2021-09-29 17:10:00.004 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 118 ] - todaySendBnkFlwList = []
+2021-09-29 17:10:00.004 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 591915131410208, batchIndex = 0
+2021-09-29 17:10:00.006 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>591915131410208</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>ZDC5FA955</CHECKCODE>
+</PGK>
+
+2021-09-29 17:10:00.626 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 17:10:00.626 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 17:10:00.631 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 60
+2021-09-29 17:10:00.632 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 7
+2021-09-29 17:10:00.632 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 17:10:01.133 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 310899991010008776083, batchIndex = 0
+2021-09-29 17:10:01.134 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>310899991010008776083</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>Z625516C9</CHECKCODE>
+</PGK>
+
+2021-09-29 17:10:01.650 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 17:10:01.650 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 17:10:01.654 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 29
+2021-09-29 17:10:01.655 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 17:10:01.655 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 17:10:02.156 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 755915678910506, batchIndex = 0
+2021-09-29 17:10:02.158 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>755915678910506</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>ZDD9D36F9</CHECKCODE>
+</PGK>
+
+2021-09-29 17:10:02.314 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 17:10:02.314 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 17:10:02.317 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 0
+2021-09-29 17:10:02.317 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 17:10:02.317 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 17:10:02.819 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 755915678910202, batchIndex = 0
+2021-09-29 17:10:02.821 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>755915678910202</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>Z6B8EEB50</CHECKCODE>
+</PGK>
+
+2021-09-29 17:10:02.923 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 17:10:02.923 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 17:10:02.925 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 0
+2021-09-29 17:10:02.926 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 17:10:02.926 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 17:10:03.426 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 787 ] - 最终2.8返回的rltList.size = 7
+2021-09-29 17:10:03.426 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 144 ] - 过滤收款后，（借贷方向=2，存在银行流水号且不再今日已发送里，款项类型为货款） todayDetailSkList 收款 List.size = 0
+2021-09-29 17:10:03.426 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 145 ] - 过滤付款后，（借贷方向=1，存在银行流水号且不再今日已发送里，存在支付流水号） todayDetailSkList 付款 List.size = 0
+2021-09-29 17:10:03.426 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 149 ] - 今天到现在，过滤后的 收付款 列表 都为空
+2021-09-29 17:10:03.426 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.w.modules.task.application.SchedulingRunnable : 65 ] - 定时任务执行结束 - bean：cbsService，方法：handleTodayDetailAndNotice，参数：null，耗时：3423 毫秒
+2021-09-29 17:15:00.003 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.w.modules.task.application.SchedulingRunnable : 37 ] - 定时任务开始执行 - bean：cbsService，方法：handleTodayDetailAndNotice，参数：null
+2021-09-29 17:15:00.003 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 114 ] - handleTodayDetailAndNotice....
+2021-09-29 17:15:00.003 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - Creating a new SqlSession
+2021-09-29 17:15:00.003 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5dbff86] was not registered for synchronization because synchronization is not active
+2021-09-29 17:15:00.003 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.springframework.jdbc.datasource.DataSourceUtils : 115 ] - Fetching JDBC Connection from DataSource
+2021-09-29 17:15:00.003 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.m.spring.transaction.SpringManagedTransaction : 49 ] - JDBC Connection [org.sqlite.jdbc4.JDBC4Connection@5cd5fb7c] will not be managed by Spring
+2021-09-29 17:15:00.004 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - ==>  Preparing: select distinct bnk_flw from dzhd_send_record where send_date = current_date and bnk_flw is not null and bnk_flw != ''
+2021-09-29 17:15:00.004 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - ==> Parameters: 
+2021-09-29 17:15:00.005 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - <==      Total: 0
+2021-09-29 17:15:00.005 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5dbff86]
+2021-09-29 17:15:00.005 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 118 ] - todaySendBnkFlwList = []
+2021-09-29 17:15:00.005 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 591915131410208, batchIndex = 0
+2021-09-29 17:15:00.008 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>591915131410208</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>ZDC5FA955</CHECKCODE>
+</PGK>
+
+2021-09-29 17:15:00.741 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 17:15:00.741 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 17:15:00.746 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 60
+2021-09-29 17:15:00.747 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 7
+2021-09-29 17:15:00.747 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 17:15:01.247 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 310899991010008776083, batchIndex = 0
+2021-09-29 17:15:01.248 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>310899991010008776083</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>Z625516C9</CHECKCODE>
+</PGK>
+
+2021-09-29 17:15:01.681 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 17:15:01.681 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 17:15:01.685 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 29
+2021-09-29 17:15:01.685 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 17:15:01.685 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 17:15:02.186 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 755915678910506, batchIndex = 0
+2021-09-29 17:15:02.187 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>755915678910506</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>ZDD9D36F9</CHECKCODE>
+</PGK>
+
+2021-09-29 17:15:02.283 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 17:15:02.283 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 17:15:02.286 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 0
+2021-09-29 17:15:02.286 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 17:15:02.286 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 17:15:02.787 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 755915678910202, batchIndex = 0
+2021-09-29 17:15:02.788 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>755915678910202</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>Z6B8EEB50</CHECKCODE>
+</PGK>
+
+2021-09-29 17:15:02.881 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 17:15:02.881 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 17:15:02.884 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 0
+2021-09-29 17:15:02.884 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 17:15:02.884 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 17:15:03.385 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 787 ] - 最终2.8返回的rltList.size = 7
+2021-09-29 17:15:03.385 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 144 ] - 过滤收款后，（借贷方向=2，存在银行流水号且不再今日已发送里，款项类型为货款） todayDetailSkList 收款 List.size = 0
+2021-09-29 17:15:03.385 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 145 ] - 过滤付款后，（借贷方向=1，存在银行流水号且不再今日已发送里，存在支付流水号） todayDetailSkList 付款 List.size = 0
+2021-09-29 17:15:03.385 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 149 ] - 今天到现在，过滤后的 收付款 列表 都为空
+2021-09-29 17:15:03.385 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.w.modules.task.application.SchedulingRunnable : 65 ] - 定时任务执行结束 - bean：cbsService，方法：handleTodayDetailAndNotice，参数：null，耗时：3382 毫秒
+2021-09-29 17:20:00.006 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.w.modules.task.application.SchedulingRunnable : 37 ] - 定时任务开始执行 - bean：cbsService，方法：handleTodayDetailAndNotice，参数：null
+2021-09-29 17:20:00.006 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 114 ] - handleTodayDetailAndNotice....
+2021-09-29 17:20:00.006 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - Creating a new SqlSession
+2021-09-29 17:20:00.006 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@73524b53] was not registered for synchronization because synchronization is not active
+2021-09-29 17:20:00.007 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.springframework.jdbc.datasource.DataSourceUtils : 115 ] - Fetching JDBC Connection from DataSource
+2021-09-29 17:20:00.007 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.m.spring.transaction.SpringManagedTransaction : 49 ] - JDBC Connection [org.sqlite.jdbc4.JDBC4Connection@5cd5fb7c] will not be managed by Spring
+2021-09-29 17:20:00.007 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - ==>  Preparing: select distinct bnk_flw from dzhd_send_record where send_date = current_date and bnk_flw is not null and bnk_flw != ''
+2021-09-29 17:20:00.007 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - ==> Parameters: 
+2021-09-29 17:20:00.007 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - <==      Total: 0
+2021-09-29 17:20:00.008 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@73524b53]
+2021-09-29 17:20:00.008 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 118 ] - todaySendBnkFlwList = []
+2021-09-29 17:20:00.008 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 591915131410208, batchIndex = 0
+2021-09-29 17:20:00.009 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>591915131410208</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>ZDC5FA955</CHECKCODE>
+</PGK>
+
+2021-09-29 17:20:01.099 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 17:20:01.099 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 17:20:01.104 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 60
+2021-09-29 17:20:01.105 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 7
+2021-09-29 17:20:01.105 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 17:20:01.606 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 310899991010008776083, batchIndex = 0
+2021-09-29 17:20:01.607 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>310899991010008776083</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>Z625516C9</CHECKCODE>
+</PGK>
+
+2021-09-29 17:20:02.446 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 17:20:02.446 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 17:20:02.450 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 29
+2021-09-29 17:20:02.451 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 17:20:02.451 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 17:20:02.951 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 755915678910506, batchIndex = 0
+2021-09-29 17:20:02.952 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>755915678910506</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>ZDD9D36F9</CHECKCODE>
+</PGK>
+
+2021-09-29 17:20:03.046 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 17:20:03.046 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 17:20:03.049 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 0
+2021-09-29 17:20:03.049 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 17:20:03.049 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 17:20:03.549 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 755915678910202, batchIndex = 0
+2021-09-29 17:20:03.550 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>755915678910202</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>Z6B8EEB50</CHECKCODE>
+</PGK>
+
+2021-09-29 17:20:03.645 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 17:20:03.645 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 17:20:03.648 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 0
+2021-09-29 17:20:03.648 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 17:20:03.648 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 17:20:04.149 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 787 ] - 最终2.8返回的rltList.size = 7
+2021-09-29 17:20:04.149 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 144 ] - 过滤收款后，（借贷方向=2，存在银行流水号且不再今日已发送里，款项类型为货款） todayDetailSkList 收款 List.size = 0
+2021-09-29 17:20:04.149 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 145 ] - 过滤付款后，（借贷方向=1，存在银行流水号且不再今日已发送里，存在支付流水号） todayDetailSkList 付款 List.size = 0
+2021-09-29 17:20:04.149 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 149 ] - 今天到现在，过滤后的 收付款 列表 都为空
+2021-09-29 17:20:04.149 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.w.modules.task.application.SchedulingRunnable : 65 ] - 定时任务执行结束 - bean：cbsService，方法：handleTodayDetailAndNotice，参数：null，耗时：4143 毫秒
+2021-09-29 17:25:00.007 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.w.modules.task.application.SchedulingRunnable : 37 ] - 定时任务开始执行 - bean：cbsService，方法：handleTodayDetailAndNotice，参数：null
+2021-09-29 17:25:00.007 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 114 ] - handleTodayDetailAndNotice....
+2021-09-29 17:25:00.007 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - Creating a new SqlSession
+2021-09-29 17:25:00.007 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6edf7f00] was not registered for synchronization because synchronization is not active
+2021-09-29 17:25:00.007 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.springframework.jdbc.datasource.DataSourceUtils : 115 ] - Fetching JDBC Connection from DataSource
+2021-09-29 17:25:00.008 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.m.spring.transaction.SpringManagedTransaction : 49 ] - JDBC Connection [org.sqlite.jdbc4.JDBC4Connection@5cd5fb7c] will not be managed by Spring
+2021-09-29 17:25:00.008 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - ==>  Preparing: select distinct bnk_flw from dzhd_send_record where send_date = current_date and bnk_flw is not null and bnk_flw != ''
+2021-09-29 17:25:00.008 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - ==> Parameters: 
+2021-09-29 17:25:00.008 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - <==      Total: 0
+2021-09-29 17:25:00.008 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6edf7f00]
+2021-09-29 17:25:00.009 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 118 ] - todaySendBnkFlwList = []
+2021-09-29 17:25:00.009 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 591915131410208, batchIndex = 0
+2021-09-29 17:25:00.010 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>591915131410208</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>ZDC5FA955</CHECKCODE>
+</PGK>
+
+2021-09-29 17:25:01.247 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 17:25:01.247 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 17:25:01.253 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 60
+2021-09-29 17:25:01.253 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 7
+2021-09-29 17:25:01.253 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 17:25:01.754 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 310899991010008776083, batchIndex = 0
+2021-09-29 17:25:01.756 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>310899991010008776083</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>Z625516C9</CHECKCODE>
+</PGK>
+
+2021-09-29 17:25:02.458 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 17:25:02.458 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 17:25:02.462 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 29
+2021-09-29 17:25:02.463 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 17:25:02.463 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 17:25:02.964 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 755915678910506, batchIndex = 0
+2021-09-29 17:25:02.965 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>755915678910506</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>ZDD9D36F9</CHECKCODE>
+</PGK>
+
+2021-09-29 17:25:03.061 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 17:25:03.061 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 17:25:03.064 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 0
+2021-09-29 17:25:03.064 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 17:25:03.064 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 17:25:03.564 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 755915678910202, batchIndex = 0
+2021-09-29 17:25:03.565 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>755915678910202</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>Z6B8EEB50</CHECKCODE>
+</PGK>
+
+2021-09-29 17:25:03.670 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 17:25:03.670 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 17:25:03.672 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 0
+2021-09-29 17:25:03.672 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 17:25:03.672 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 17:25:04.173 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 787 ] - 最终2.8返回的rltList.size = 7
+2021-09-29 17:25:04.173 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 144 ] - 过滤收款后，（借贷方向=2，存在银行流水号且不再今日已发送里，款项类型为货款） todayDetailSkList 收款 List.size = 0
+2021-09-29 17:25:04.173 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 145 ] - 过滤付款后，（借贷方向=1，存在银行流水号且不再今日已发送里，存在支付流水号） todayDetailSkList 付款 List.size = 0
+2021-09-29 17:25:04.173 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 149 ] - 今天到现在，过滤后的 收付款 列表 都为空
+2021-09-29 17:25:04.173 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.w.modules.task.application.SchedulingRunnable : 65 ] - 定时任务执行结束 - bean：cbsService，方法：handleTodayDetailAndNotice，参数：null，耗时：4166 毫秒
+2021-09-29 17:30:00.007 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.w.modules.task.application.SchedulingRunnable : 37 ] - 定时任务开始执行 - bean：cbsService，方法：handleTodayDetailAndNotice，参数：null
+2021-09-29 17:30:00.007 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 114 ] - handleTodayDetailAndNotice....
+2021-09-29 17:30:00.007 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - Creating a new SqlSession
+2021-09-29 17:30:00.007 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@588dc31e] was not registered for synchronization because synchronization is not active
+2021-09-29 17:30:00.007 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.springframework.jdbc.datasource.DataSourceUtils : 115 ] - Fetching JDBC Connection from DataSource
+2021-09-29 17:30:00.007 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.m.spring.transaction.SpringManagedTransaction : 49 ] - JDBC Connection [org.sqlite.jdbc4.JDBC4Connection@5cd5fb7c] will not be managed by Spring
+2021-09-29 17:30:00.008 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - ==>  Preparing: select distinct bnk_flw from dzhd_send_record where send_date = current_date and bnk_flw is not null and bnk_flw != ''
+2021-09-29 17:30:00.008 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - ==> Parameters: 
+2021-09-29 17:30:00.008 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - <==      Total: 0
+2021-09-29 17:30:00.008 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@588dc31e]
+2021-09-29 17:30:00.008 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 118 ] - todaySendBnkFlwList = []
+2021-09-29 17:30:00.008 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 591915131410208, batchIndex = 0
+2021-09-29 17:30:00.010 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>591915131410208</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>ZDC5FA955</CHECKCODE>
+</PGK>
+
+2021-09-29 17:30:00.889 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 17:30:00.889 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 17:30:00.895 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 60
+2021-09-29 17:30:00.895 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 7
+2021-09-29 17:30:00.895 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 17:30:01.396 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 310899991010008776083, batchIndex = 0
+2021-09-29 17:30:01.397 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>310899991010008776083</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>Z625516C9</CHECKCODE>
+</PGK>
+
+2021-09-29 17:30:01.985 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 17:30:01.985 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 17:30:01.989 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 29
+2021-09-29 17:30:01.989 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 17:30:01.989 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 17:30:02.491 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 755915678910506, batchIndex = 0
+2021-09-29 17:30:02.492 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>755915678910506</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>ZDD9D36F9</CHECKCODE>
+</PGK>
+
+2021-09-29 17:30:02.581 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 17:30:02.581 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 17:30:02.584 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 0
+2021-09-29 17:30:02.584 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 17:30:02.584 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 17:30:03.084 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 755915678910202, batchIndex = 0
+2021-09-29 17:30:03.085 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>755915678910202</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>Z6B8EEB50</CHECKCODE>
+</PGK>
+
+2021-09-29 17:30:03.180 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 17:30:03.180 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 17:30:03.183 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 0
+2021-09-29 17:30:03.184 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 17:30:03.184 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 17:30:03.685 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 787 ] - 最终2.8返回的rltList.size = 7
+2021-09-29 17:30:03.685 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 144 ] - 过滤收款后，（借贷方向=2，存在银行流水号且不再今日已发送里，款项类型为货款） todayDetailSkList 收款 List.size = 0
+2021-09-29 17:30:03.685 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 145 ] - 过滤付款后，（借贷方向=1，存在银行流水号且不再今日已发送里，存在支付流水号） todayDetailSkList 付款 List.size = 0
+2021-09-29 17:30:03.685 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 149 ] - 今天到现在，过滤后的 收付款 列表 都为空
+2021-09-29 17:30:03.685 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.w.modules.task.application.SchedulingRunnable : 65 ] - 定时任务执行结束 - bean：cbsService，方法：handleTodayDetailAndNotice，参数：null，耗时：3678 毫秒
+2021-09-29 17:35:00.006 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.w.modules.task.application.SchedulingRunnable : 37 ] - 定时任务开始执行 - bean：cbsService，方法：handleTodayDetailAndNotice，参数：null
+2021-09-29 17:35:00.006 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 114 ] - handleTodayDetailAndNotice....
+2021-09-29 17:35:00.006 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - Creating a new SqlSession
+2021-09-29 17:35:00.007 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@579e6bbb] was not registered for synchronization because synchronization is not active
+2021-09-29 17:35:00.007 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.springframework.jdbc.datasource.DataSourceUtils : 115 ] - Fetching JDBC Connection from DataSource
+2021-09-29 17:35:00.007 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.m.spring.transaction.SpringManagedTransaction : 49 ] - JDBC Connection [org.sqlite.jdbc4.JDBC4Connection@5cd5fb7c] will not be managed by Spring
+2021-09-29 17:35:00.007 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - ==>  Preparing: select distinct bnk_flw from dzhd_send_record where send_date = current_date and bnk_flw is not null and bnk_flw != ''
+2021-09-29 17:35:00.007 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - ==> Parameters: 
+2021-09-29 17:35:00.007 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - <==      Total: 0
+2021-09-29 17:35:00.008 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@579e6bbb]
+2021-09-29 17:35:00.008 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 118 ] - todaySendBnkFlwList = []
+2021-09-29 17:35:00.008 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 591915131410208, batchIndex = 0
+2021-09-29 17:35:00.010 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>591915131410208</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>ZDC5FA955</CHECKCODE>
+</PGK>
+
+2021-09-29 17:35:00.289 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 17:35:00.289 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 17:35:00.295 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 60
+2021-09-29 17:35:00.295 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 7
+2021-09-29 17:35:00.295 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 17:35:00.796 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 310899991010008776083, batchIndex = 0
+2021-09-29 17:35:00.797 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>310899991010008776083</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>Z625516C9</CHECKCODE>
+</PGK>
+
+2021-09-29 17:35:00.977 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 17:35:00.977 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 17:35:00.981 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 29
+2021-09-29 17:35:00.981 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 17:35:00.981 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 17:35:01.482 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 755915678910506, batchIndex = 0
+2021-09-29 17:35:01.482 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>755915678910506</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>ZDD9D36F9</CHECKCODE>
+</PGK>
+
+2021-09-29 17:35:01.586 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 17:35:01.587 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 17:35:01.589 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 0
+2021-09-29 17:35:01.589 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 17:35:01.614 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 17:35:02.115 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 755915678910202, batchIndex = 0
+2021-09-29 17:35:02.116 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>755915678910202</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>Z6B8EEB50</CHECKCODE>
+</PGK>
+
+2021-09-29 17:35:02.221 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 17:35:02.222 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 17:35:02.224 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 0
+2021-09-29 17:35:02.224 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 17:35:02.224 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 17:35:02.724 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 787 ] - 最终2.8返回的rltList.size = 7
+2021-09-29 17:35:02.724 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 144 ] - 过滤收款后，（借贷方向=2，存在银行流水号且不再今日已发送里，款项类型为货款） todayDetailSkList 收款 List.size = 0
+2021-09-29 17:35:02.724 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 145 ] - 过滤付款后，（借贷方向=1，存在银行流水号且不再今日已发送里，存在支付流水号） todayDetailSkList 付款 List.size = 0
+2021-09-29 17:35:02.724 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 149 ] - 今天到现在，过滤后的 收付款 列表 都为空
+2021-09-29 17:35:02.724 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.w.modules.task.application.SchedulingRunnable : 65 ] - 定时任务执行结束 - bean：cbsService，方法：handleTodayDetailAndNotice，参数：null，耗时：2718 毫秒
+2021-09-29 17:40:00.005 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.w.modules.task.application.SchedulingRunnable : 37 ] - 定时任务开始执行 - bean：cbsService，方法：handleTodayDetailAndNotice，参数：null
+2021-09-29 17:40:00.005 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 114 ] - handleTodayDetailAndNotice....
+2021-09-29 17:40:00.005 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - Creating a new SqlSession
+2021-09-29 17:40:00.005 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4052cc75] was not registered for synchronization because synchronization is not active
+2021-09-29 17:40:00.005 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.springframework.jdbc.datasource.DataSourceUtils : 115 ] - Fetching JDBC Connection from DataSource
+2021-09-29 17:40:00.005 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.m.spring.transaction.SpringManagedTransaction : 49 ] - JDBC Connection [org.sqlite.jdbc4.JDBC4Connection@5cd5fb7c] will not be managed by Spring
+2021-09-29 17:40:00.006 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - ==>  Preparing: select distinct bnk_flw from dzhd_send_record where send_date = current_date and bnk_flw is not null and bnk_flw != ''
+2021-09-29 17:40:00.006 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - ==> Parameters: 
+2021-09-29 17:40:00.006 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ o.a.i.c.c.w.m.c.m.D.getTodaySendBnkFlwList : 137 ] - <==      Total: 0
+2021-09-29 17:40:00.006 [ TaskSchedulerThreadPool-1 ] - [ DEBUG ] [ org.mybatis.spring.SqlSessionUtils : 49 ] - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4052cc75]
+2021-09-29 17:40:00.006 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 118 ] - todaySendBnkFlwList = []
+2021-09-29 17:40:00.006 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 591915131410208, batchIndex = 0
+2021-09-29 17:40:00.008 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>591915131410208</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>ZDC5FA955</CHECKCODE>
+</PGK>
+
+2021-09-29 17:40:00.271 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 17:40:00.272 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 17:40:00.277 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 60
+2021-09-29 17:40:00.278 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 7
+2021-09-29 17:40:00.278 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 17:40:00.778 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 310899991010008776083, batchIndex = 0
+2021-09-29 17:40:00.779 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>310899991010008776083</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>Z625516C9</CHECKCODE>
+</PGK>
+
+2021-09-29 17:40:01.087 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 17:40:01.087 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 17:40:01.091 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 29
+2021-09-29 17:40:01.091 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 17:40:01.091 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 17:40:01.592 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 755915678910506, batchIndex = 0
+2021-09-29 17:40:01.593 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>755915678910506</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>ZDD9D36F9</CHECKCODE>
+</PGK>
+
+2021-09-29 17:40:01.690 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 17:40:01.690 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 17:40:01.693 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 0
+2021-09-29 17:40:01.693 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 17:40:01.693 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 17:40:02.193 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 709 ] - actNbr = 755915678910202, batchIndex = 0
+2021-09-29 17:40:02.194 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 742 ] -     2.8请求报文 = <?xml version="1.0" encoding="GBK" ?>
+<PGK>
+    <DATA><![CDATA[<?xml version="1.0" encoding="GBK" ?>
+<CBSERPPGK>
+    <INFO>
+        <FUNNAM>ERCURDTL</FUNNAM>
+    </INFO>
+    <ERCURDTLB>
+        <ACTNBR>755915678910202</ACTNBR>
+    </ERCURDTLB>
+    <ERCURDTLA>
+        <ITMDIR>A</ITMDIR>
+        <VTLFLG>0</VTLFLG>
+    </ERCURDTLA>
+</CBSERPPGK>
+]]></DATA>
+    <CHECKCODE>Z6B8EEB50</CHECKCODE>
+</PGK>
+
+2021-09-29 17:40:02.289 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 746 ] -     2.8返回报文为： 
+2021-09-29 17:40:02.289 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 747 ] -     -------- 
+2021-09-29 17:40:02.291 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 756 ] -     2.8返回未过滤的list.size = 0
+2021-09-29 17:40:02.291 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 763 ] -     2.8过滤掉不是当天的交易后，todayList.size = 0
+2021-09-29 17:40:02.292 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 769 ] -     2.8返回报文中没有续传号
+2021-09-29 17:40:02.792 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 787 ] - 最终2.8返回的rltList.size = 7
+2021-09-29 17:40:02.792 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 144 ] - 过滤收款后，（借贷方向=2，存在银行流水号且不再今日已发送里，款项类型为货款） todayDetailSkList 收款 List.size = 0
+2021-09-29 17:40:02.792 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 145 ] - 过滤付款后，（借贷方向=1，存在银行流水号且不再今日已发送里，存在支付流水号） todayDetailSkList 付款 List.size = 0
+2021-09-29 17:40:02.792 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.weChatNotice.modules.cbs.service.CbsService : 149 ] - 今天到现在，过滤后的 收付款 列表 都为空
+2021-09-29 17:40:02.792 [ TaskSchedulerThreadPool-1 ] - [ INFO  ] [ c.c.w.modules.task.application.SchedulingRunnable : 65 ] - 定时任务执行结束 - bean：cbsService，方法：handleTodayDetailAndNotice，参数：null，耗时：2787 毫秒
