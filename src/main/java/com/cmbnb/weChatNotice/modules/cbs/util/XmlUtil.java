@@ -2,7 +2,10 @@ package com.cmbnb.weChatNotice.modules.cbs.util;
 
 
 
+import com.cmbnb.weChatNotice.modules.task.application.SchedulingRunnable;
 import com.sun.xml.internal.bind.marshaller.CharacterEscapeHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
@@ -17,7 +20,7 @@ import java.io.Writer;
  */
 public class XmlUtil {
 
-
+    private static final Logger logger = LoggerFactory.getLogger(XmlUtil.class);
     /**
      * JavaBean装换成xml
      * 默认编码UTF-8
@@ -70,6 +73,8 @@ public class XmlUtil {
             return  (T)unmarshaller.unmarshal(new StringReader(xml));
         } catch (Exception e) {
             e.printStackTrace();
+            logger.error("convert2JavaBean时 出错");
+            logger.error(e.getMessage(), e);
             throw new RuntimeException(e);
         }
     }

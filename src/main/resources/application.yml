@@ -29,7 +29,10 @@ pagehelper: # pageHelper 分页插件设置
 
 
 config:
-  checkDzhdCron: 0 0/5 * * * ?  # 定时任务cron
+  checkDzhdCron: 0 */4 * * * ?  # 定时任务cron
+  sleepTime: 2000  # http请求的间隔，毫秒数
+  httpConnectTimeout: 30000  # 连接超时 毫秒数
+  httpReadTimeout: 20000 # 读超时  毫秒数
 
 wechat:
   corpid: ww4d810f1479a29e4b
@@ -43,6 +46,7 @@ wechat:
 
 cbs:
   requestHttpUrl: http://127.0.0.1:10666
+  port: 10666
   bwKey: 2
   CRC32_PASSWORD: CMBChina2009
   CRC32_PREFIX: Z
@@ -50,5 +54,5 @@ cbs:
 
 
 server:
-  port: 8081
+  port: 8777
 

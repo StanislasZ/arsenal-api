@@ -3,6 +3,7 @@ package com.cmbnb.weChatNotice.modules.cbs.service;
 import com.alibaba.fastjson.JSONObject;
 import com.cmbnb.weChatNotice.core.util.CommonUtils;
 import com.cmbnb.weChatNotice.core.util.DateUtil;
+import com.cmbnb.weChatNotice.core.util.NetUtils;
 import com.cmbnb.weChatNotice.core.util.StringTools;
 import com.cmbnb.weChatNotice.modules.cbs.bean.CbsConfig;
 import com.cmbnb.weChatNotice.modules.cbs.mapper.DzhdSendRecordMapper;
@@ -33,6 +34,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -67,21 +69,41 @@ public class CbsService {
     @Autowired
     WechatUserMapper wechatUserMapper;
 
+    @Value("${config.sleepTime}")
+    private long httpSleepTime;
 
+    @Value("${config.httpConnectTimeout}")
+    private int httpConnectTimeout;
+
+    @Value("${config.httpReadTimeout}")
+    private int httpReadTimeout;
+
+    private Boolean taskDone = true;
+
+
+    private Boolean testDone = true;
 
 
     //处理http请求  requestUrl为请求地址  requestMethod请求方式，值为"GET"或"POST"
     public String httpRequest(String requestUrl,String requestMethod,String outputStr){
 
-//		System.setProperty("https.protocols", "TLSv1,TLSv1.1,TLSv1.2");
+
 
         StringBuffer buffer=null;
         try{
+            //先sleep, 防止后面的请求无效
+            Thread.sleep(httpSleepTime);
+
             URL url=new URL(requestUrl);
             HttpURLConnection conn=(HttpURLConnection)url.openConnection();
             conn.setDoOutput(true);
             conn.setDoInput(true);
             conn.setRequestMethod(requestMethod);
+
+            conn.setConnectTimeout(httpConnectTimeout);   //连接超时时间
+            conn.setReadTimeout(httpReadTimeout);   //读超时时间
+
+
             conn.connect();
             //往服务器端写内容 也就是发起http请求需要带的参数
             if(null!=outputStr){
@@ -101,9 +123,33 @@ public class CbsService {
                 buffer.append(line);
             }
         }catch(Exception e){
+            log.error("请求cbs时出错");
+            log.error(e.getMessage(), e);
             e.printStackTrace();
         }
         return buffer.toString();
+    }
+
+
+    public void testCronTask() throws Exception {
+
+        if (!testDone) {
+            log.info("上一次任务还没结束，这次直接返回");
+            return;
+        }
+        testDone = false;
+
+        try {
+            Thread.sleep(2000);
+            throw new Exception("测试异常");
+        } catch (Exception e) {
+            log.error("testCronTask出错");
+            log.error(e.getMessage(), e);
+        } finally {
+            testDone = true;
+            System.out.println(" in finally...  testDone = " + testDone);
+        }
+
     }
 
 
@@ -113,67 +159,89 @@ public class CbsService {
     public void handleTodayDetailAndNotice() {
         log.info("handleTodayDetailAndNotice....");
 
-        //获取今日已经发送成功过电子回单的    bnkFlw的列表
-        List<String> todaySendBnkFlwList = dzhdSendRecordMapper.getTodaySendBnkFlwList();
-        log.info("todaySendBnkFlwList = {}", todaySendBnkFlwList);
-
-        // 先拿到今日明细
-        List<Ercurdtlz> todayDetailList = getTodayDetail();
-
-
-        //当日明细中， 收款的 ，  进行过滤
-        //规则为 借贷方向=2，存在银行流水号且不再今日已发送里，款项类型为货款
-        List<Ercurdtlz> todayDetailSkList = todayDetailList
-                .stream()
-                .filter(ele ->  !StringUtils.isEmpty(ele.getItmDir()) && ele.getItmDir().equals("2")
-                        && !StringUtils.isEmpty(ele.getBnkFlw()) && !todaySendBnkFlwList.contains(ele.getBnkFlw())
-                        && !StringUtils.isEmpty(ele.getMonTyp()) && ele.getMonTyp().equals("03")
-                )
-                .collect(Collectors.toList());
-
-
-        //当日明细中， 付款的
-        List<Ercurdtlz> todayDetailFkList = todayDetailList
-                .stream()
-                .filter(ele -> !StringUtils.isEmpty(ele.getItmDir()) && ele.getItmDir().equals("1")
-                        && !StringUtils.isEmpty(ele.getBnkFlw()) && !todaySendBnkFlwList.contains(ele.getBnkFlw())
-                        && !StringUtils.isEmpty(ele.getPayNbr())
-                )
-                .collect(Collectors.toList());
-
-        log.info("过滤收款后，（借贷方向=2，存在银行流水号且不再今日已发送里，款项类型为货款） todayDetailSkList 收款 List.size = {}", todayDetailSkList.size());
-        log.info("过滤付款后，（借贷方向=1，存在银行流水号且不再今日已发送里，存在支付流水号） todayDetailSkList 付款 List.size = {}", todayDetailFkList.size());
-
-
-        if (todayDetailSkList.size() == 0 && todayDetailFkList.size() == 0) {
-            log.info("今天到现在，过滤后的 收付款 列表 都为空");
+        if (!taskDone) {
+            log.info("上一次任务还在执行中，这次直接返回");
             return;
         }
+        log.info("taskDone = true, 上一次任务已结束， 这次任务开始");
 
-        //5.1接口  拿到电子回单数据
-        List<Dcdrqryz1> todayDzhdList = getTodayDzhd();
-        log.info("todayDzhdList = {}", JSONObject.toJSONString(todayDzhdList));
+        //判断cbs客户端是否正常开启
+        if (!NetUtils.isLocalPortUsing(cbsConfig.getPort())) {
+            log.info("本地 cbs端口 {} 未被占用， 说明cbs客户端没起， 或者起了， 但http服务没开, 直接return");
+            return;
+        } else {
+            log.info("本地 cbs端口 {} 被占用， 说明cbs客户端已启动， 且http服务已开, 进行下一步");
+        }
 
+        try {
+            taskDone = false;
+            //获取今日已经发送成功过电子回单的    bnkFlw的列表
+            List<String> todaySendBnkFlwList = dzhdSendRecordMapper.getTodaySendBnkFlwList();
+            log.info("todaySendBnkFlwList = {}", todaySendBnkFlwList);
 
-        //把todayDzhdList 转化 成  Map， key为list元素的bnkFlw， 值为元素
-        Map<String, List<Dcdrqryz1>> bnkFlwDcdrqryz1Map = todayDzhdList
-                .stream()
-                .collect(Collectors.groupingBy(Dcdrqryz1::getBnkFlw));
-        log.info("bnkFlwDcdrqryz1Map = {}", bnkFlwDcdrqryz1Map);
-
-        //5.2接口  主要拿到电子回单的 pdf文件路径
-        DzhdInfo todayDzhdInfo = getDzhdPdfList(todayDzhdList);
-
-        //处理 2.8返回的当日 收款 列表
-        handleTodayDetailSkList(todayDetailSkList, bnkFlwDcdrqryz1Map, todayDzhdInfo);
-
-
-        PaySettleData psd = getPaySettleDataList(todayDetailFkList);
+            // 先拿到今日明细
+            List<Ercurdtlz> todayDetailList = getTodayDetail();
 
 
-        //处理 2.8返回的当日 付款 列表
-        handleTodayDetailFkList(todayDetailFkList, bnkFlwDcdrqryz1Map, todayDzhdInfo, psd);
+            //当日明细中， 收款的 ，  进行过滤
+            //规则为 借贷方向=2，存在银行流水号且不再今日已发送里，款项类型为货款
+            List<Ercurdtlz> todayDetailSkList = todayDetailList
+                    .stream()
+                    .filter(ele ->  !StringUtils.isEmpty(ele.getItmDir()) && ele.getItmDir().equals("2")
+                            && !StringUtils.isEmpty(ele.getBnkFlw()) && !todaySendBnkFlwList.contains(ele.getBnkFlw())
+                            && !StringUtils.isEmpty(ele.getMonTyp()) && ele.getMonTyp().equals("03")
+                    )
+                    .collect(Collectors.toList());
 
+
+            //当日明细中， 付款的
+            List<Ercurdtlz> todayDetailFkList = todayDetailList
+                    .stream()
+                    .filter(ele -> !StringUtils.isEmpty(ele.getItmDir()) && ele.getItmDir().equals("1")
+                            && !StringUtils.isEmpty(ele.getBnkFlw()) && !todaySendBnkFlwList.contains(ele.getBnkFlw())
+                            && !StringUtils.isEmpty(ele.getPayNbr())
+                    )
+                    .collect(Collectors.toList());
+
+            log.info("过滤收款后，（借贷方向=2，存在银行流水号且不再今日已发送里，款项类型为货款） todayDetailSkList 收款 List.size = {}", todayDetailSkList.size());
+            log.info("过滤付款后，（借贷方向=1，存在银行流水号且不再今日已发送里，存在支付流水号） todayDetailSkList 付款 List.size = {}", todayDetailFkList.size());
+
+
+            if (todayDetailSkList.size() == 0 && todayDetailFkList.size() == 0) {
+                log.info("今天到现在，过滤后的 收付款 列表 都为空");
+                return;
+            }
+
+            //5.1接口  拿到电子回单数据
+            List<Dcdrqryz1> todayDzhdList = getTodayDzhd();
+            log.info("todayDzhdList = {}", JSONObject.toJSONString(todayDzhdList));
+
+
+            //把todayDzhdList 转化 成  Map， key为list元素的bnkFlw， 值为元素
+            Map<String, List<Dcdrqryz1>> bnkFlwDcdrqryz1Map = todayDzhdList
+                    .stream()
+                    .collect(Collectors.groupingBy(Dcdrqryz1::getBnkFlw));
+            log.info("bnkFlwDcdrqryz1Map = {}", bnkFlwDcdrqryz1Map);
+
+            //5.2接口  主要拿到电子回单的 pdf文件路径
+            DzhdInfo todayDzhdInfo = getDzhdPdfList(todayDzhdList);
+
+            //处理 2.8返回的当日 收款 列表
+            handleTodayDetailSkList(todayDetailSkList, bnkFlwDcdrqryz1Map, todayDzhdInfo);
+
+
+            PaySettleData psd = getPaySettleDataList(todayDetailFkList);
+
+
+            //处理 2.8返回的当日 付款 列表
+            handleTodayDetailFkList(todayDetailFkList, bnkFlwDcdrqryz1Map, todayDzhdInfo, psd);
+
+        } catch (Exception e) {
+            log.error("定时任务执行异常");
+            log.error(e.getMessage(), e);
+        } finally {
+            taskDone = true;
+        }
 
 
     }
@@ -273,7 +341,7 @@ public class CbsService {
                         touser = touser + ids.get(i);
                     }
                 }
-                log.info("touser = {}", touser);
+                log.info("付款回单要发送的 touser = {}", touser);
                 //发送文件到个人
                 weChatService.sendFileToUser(touser, media_id);
 
@@ -509,7 +577,7 @@ public class CbsService {
             //2. 请求接口，获得返回的报文
             String respStr = httpRequest(cbsConfig.getRequestHttpUrl(), "GET", xml);
 
-            log.info("    5.2返回报文为： ", respStr);
+            log.info("    5.2返回报文为： {}", respStr);
             log.info("    -------- ");
 
             //把返回报文 解析成  对象
@@ -632,7 +700,7 @@ public class CbsService {
                 String respStr = httpRequest(cbsConfig.getRequestHttpUrl(), "GET", xml);
 
 
-                log.info("    5.1返回报文为： ", respStr);
+                log.info("    5.1返回报文为： {}", respStr);
                 log.info("    -------- ");
 
 
@@ -672,11 +740,6 @@ public class CbsService {
                 log.info("-------- ");
                 log.info("-------- ");
 
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
             }
         }
 
@@ -691,100 +754,99 @@ public class CbsService {
      */
     public List<Ercurdtlz> getTodayDetail() {
 
+        log.info("请求2.8接口  开始");
         List<Ercurdtlz> rltList = new ArrayList<>();
 
         String actNbrStr = cbsConfig.getActNbr();
         String[] actNbrArr = actNbrStr.split(",");
-
-        for (int i = 0; i < actNbrArr.length; i++) {
-            if (StringUtils.isEmpty(actNbrArr[i])) continue;
-
-            //用这个交易账户进行请求
-            int batchIndex = 0;
-            String dtlSeq = "---";
-
-            //若数据量大，则使用续传号持续请求
-            while (!StringUtils.isEmpty(dtlSeq)) {
-
-                log.info("actNbr = {}, batchIndex = {}", actNbrArr[i], batchIndex);
-
-                //1. 生成报文
-                ErcurdtlDataReq28 ercurdtlDataReq = new ErcurdtlDataReq28();
-                InfoReq info = new InfoReq();
-                info.setFunNam("ERCURDTL");
-                ercurdtlDataReq.setInfo(info);
-
-                //设置ERCURDTLA
-                Ercurdtla ercurdtla = new Ercurdtla();
-                ercurdtla.setItmDir("A");  //全部
-                ercurdtla.setVtlFlg("0");
-                ercurdtlDataReq.setErcurdtla(ercurdtla);
-
-                //设置ERCURDTLB
-                Ercurdtlb ercurdtlb = new Ercurdtlb();
-                ercurdtlb.setActNbr(actNbrArr[i]);
-                ercurdtlDataReq.setErcurdtlb(ercurdtlb);
-
-                //设置续传
-                Erdtlseqz erdtlseqz = new Erdtlseqz();
-                erdtlseqz.setDtlSeq(dtlSeq);
-                if (batchIndex > 0) {
-                    ercurdtlDataReq.setErdtlseqz(erdtlseqz);
-                }
-
-                Pgk pgk = new Pgk();
-                //先设置data
-                pgk.setDataByType(ercurdtlDataReq, "GBK");
-                //再根据data 获取校验码
-                pgk.setCheckCode(checkNumUtil.GetCheckSumWithCRC32(pgk.getData()));
-                String xml = XmlUtil.convert2Xml(pgk, "GBK");
-
-                log.info("    2.8请求报文 = {}", xml);
-
-                //2. 请求接口，获得返回的报文
-                String respStr = httpRequest(cbsConfig.getRequestHttpUrl(), "GET", xml);
-                log.info("    2.8返回报文为： ", respStr);
-                log.info("    -------- ");
-                //3. 把返回报文 解析成  对象
-
-                Pgk pgkResp = XmlUtil.convert2JavaBean(respStr, Pgk.class);
-
-                ErcurdtlDataResp28 dataResp = pgkResp.getDataByType(ErcurdtlDataResp28.class);
-                List<Ercurdtlz> ercurdtlzList = dataResp.getErcurdtlzList();
-                if (ercurdtlzList == null) ercurdtlzList = new ArrayList<>();
-
-                log.info("    2.8返回未过滤的list.size = {}", ercurdtlzList.size());
-
-                //这里过滤掉不是当天的交易
-                List<Ercurdtlz> ercurdtlzTodayList = ercurdtlzList
-                        .stream()
-                        .filter(ele ->  DateUtil.isToday(ele.getBnkTim()))
-                        .collect(Collectors.toList());
-                log.info("    2.8过滤掉不是当天的交易后，todayList.size = {}", ercurdtlzTodayList.size());
-
-                rltList.addAll(ercurdtlzTodayList);
-
-                //更新续传流水号
-                if (dataResp.getErdtlseqz() == null) {
-                    log.info("    2.8返回报文中没有续传号");
-                    dtlSeq = "";
-                } else {
-                    dtlSeq = dataResp.getErdtlseqz().getDtlSeq();
-                    log.info("    2.8把续传流水号设置为 {}", dtlSeq);
-                }
-                //更新索引
-                ++ batchIndex;
+        List<String> actNbrList = Arrays.asList(actNbrArr);
+        List<Ercurdtlb> ercurdtlbList = actNbrList
+                .stream()
+                .map(actNbr -> {
+                    Ercurdtlb ercurdtlb = new Ercurdtlb();
+                    ercurdtlb.setActNbr(actNbr);
+                    return ercurdtlb;
+                }).collect(Collectors.toList());
+        log.info("用账号列表生成 ercurdtlbList = {}", ercurdtlbList);
 
 
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+        int batchIndex = 0;
+        String dtlSeq = "---";
+
+        //若数据量大，则使用续传号持续请求
+        while (!StringUtils.isEmpty(dtlSeq)) {
+
+            log.info("batchIndex = {}", batchIndex);
+
+            //1. 生成报文
+            ErcurdtlDataReq28 ercurdtlDataReq = new ErcurdtlDataReq28();
+            InfoReq info = new InfoReq();
+            info.setFunNam("ERCURDTL");
+            ercurdtlDataReq.setInfo(info);
+
+            //设置ERCURDTLA
+            Ercurdtla ercurdtla = new Ercurdtla();
+            ercurdtla.setItmDir("A");  //全部
+            ercurdtla.setVtlFlg("0");
+            ercurdtlDataReq.setErcurdtla(ercurdtla);
+
+            //设置ERCURDTLB
+            ercurdtlDataReq.setErcurdtlbList(ercurdtlbList);
+
+            //设置续传
+            Erdtlseqz erdtlseqz = new Erdtlseqz();
+            erdtlseqz.setDtlSeq(dtlSeq);
+            if (batchIndex > 0) {
+                ercurdtlDataReq.setErdtlseqz(erdtlseqz);
             }
 
+            Pgk pgk = new Pgk();
+            //先设置data
+            pgk.setDataByType(ercurdtlDataReq, "GBK");
+            //再根据data 获取校验码
+            pgk.setCheckCode(checkNumUtil.GetCheckSumWithCRC32(pgk.getData()));
+            String xml = XmlUtil.convert2Xml(pgk, "GBK");
+
+            log.info("    2.8请求报文 = {}", xml);
+
+            //2. 请求接口，获得返回的报文
+            String respStr = httpRequest(cbsConfig.getRequestHttpUrl(), "GET", xml);
+            log.info("    2.8返回报文为： {}", respStr);
+            log.info("    -------- ");
+            //3. 把返回报文 解析成  对象
+
+            Pgk pgkResp = XmlUtil.convert2JavaBean(respStr, Pgk.class);
+
+            ErcurdtlDataResp28 dataResp = pgkResp.getDataByType(ErcurdtlDataResp28.class);
+            List<Ercurdtlz> ercurdtlzList = dataResp.getErcurdtlzList();
+            if (ercurdtlzList == null) ercurdtlzList = new ArrayList<>();
+
+            log.info("    2.8返回未过滤的list.size = {}", ercurdtlzList.size());
+
+            //这里过滤掉不是当天的交易
+            List<Ercurdtlz> ercurdtlzTodayList = ercurdtlzList
+                    .stream()
+                    .filter(ele ->  DateUtil.isToday(ele.getBnkTim()))
+                    .collect(Collectors.toList());
+            log.info("    2.8过滤掉不是当天的交易后，todayList.size = {}", ercurdtlzTodayList.size());
+
+            rltList.addAll(ercurdtlzTodayList);
+
+            //更新续传流水号
+            if (dataResp.getErdtlseqz() == null) {
+                log.info("    2.8返回报文中没有续传号");
+                dtlSeq = "";
+            } else {
+                dtlSeq = dataResp.getErdtlseqz().getDtlSeq();
+                log.info("    2.8把续传流水号设置为 {}", dtlSeq);
+            }
+            //更新索引
+            ++ batchIndex;
+
         }
+
         log.info("最终2.8返回的rltList.size = {}", rltList.size());
+        log.info("请求2.8接口  结束");
         return rltList;
     }
 
@@ -867,11 +929,7 @@ public class CbsService {
 
             System.out.println("*******************************************************");
             System.out.println("*******************************************************");
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+
         }
 
     }

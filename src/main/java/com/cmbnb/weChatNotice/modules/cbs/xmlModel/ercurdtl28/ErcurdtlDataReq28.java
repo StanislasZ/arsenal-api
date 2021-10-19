@@ -4,6 +4,7 @@ import com.cmbnb.weChatNotice.modules.cbs.xmlModel.InfoReq;
 import lombok.Data;
 
 import javax.xml.bind.annotation.*;
+import java.util.List;
 
 /**
 
@@ -26,14 +27,17 @@ import javax.xml.bind.annotation.*;
 @Data
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "CBSERPPGK")
-@XmlType(name = "CBSERPPGK", propOrder = {"info", "ercurdtlb", "ercurdtla", "erdtlseqz"})
+@XmlType(name = "CBSERPPGK", propOrder = {"info", "ercurdtlbList", "ercurdtla", "erdtlseqz"})
 public class ErcurdtlDataReq28 {
 
     @XmlElement(name = "INFO")
     private InfoReq info;
 
+//    @XmlElement(name = "ERCURDTLB")
+//    private Ercurdtlb ercurdtlb;
+
     @XmlElement(name = "ERCURDTLB")
-    private Ercurdtlb ercurdtlb;
+    private List<Ercurdtlb> ercurdtlbList;
 
     @XmlElement(name = "ERCURDTLA")
     private Ercurdtla ercurdtla;

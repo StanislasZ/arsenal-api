@@ -12,6 +12,8 @@ public class CbsConfig {
 
     private String requestHttpUrl;
 
+    private Integer port;
+
     private String bwKey;
 
     private String CRC32_PASSWORD;

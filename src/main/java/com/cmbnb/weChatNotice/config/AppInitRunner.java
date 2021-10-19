@@ -34,6 +34,13 @@ public class AppInitRunner implements ApplicationRunner {
                 null);
         cronTaskRegistrar.addCronTask(checkDzhdTask, checkDzhdCron);
 
+
+//        SchedulingRunnable testTask = new SchedulingRunnable("cbsService",
+//                "testCronTask",
+//                null);
+//        cronTaskRegistrar.addCronTask(testTask, "0 0/2 * * * ?");
+
+
         System.out.println("application 启动， 把cbsService方法 加入 定时任务中.... ");
     }
 }
