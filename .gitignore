@@ -3,9 +3,20 @@
 xfzmd.iml
 /mvnw
 /mvnw.cmd
+
+
+target/
+.target
 /target/
+**/target/
 
 
 
-lib/phjr-webservie-core-0.0.1.jar
 /hesLog/
+
+
+
+*.classpath
+*.project
+.settings
+.project
