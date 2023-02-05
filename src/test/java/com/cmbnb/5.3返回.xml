@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding ="GBK"?>
+<CBSERPPGK>
+    <INFO>
+        <ERPTYP>H</ERPTYP>
+        <ERRMSG></ERRMSG>
+        <FUNNAM>ERDRCQRY</FUNNAM>
+        <RETCOD>0000000</RETCOD>
+    </INFO>
+    <SYCOMRETZ>
+        <ERRCOD>0000000</ERRCOD>
+        <ERRDTL></ERRDTL>
+        <ERRMSG></ERRMSG>
+    </SYCOMRETZ>
+</CBSERPPGK>

@@ -1,12 +1,11 @@
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    driver-class-name: org.sqlite.JDBC
-    url: jdbc:sqlite:D:/zry/software/sqliteDb/hes.db
-    username:
-    password:
-    druid:
-      validation-query: select 1
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: sixinbuxi
+    url: jdbc:mysql://localhost:3306/arsenal?serverTimezone=UTC&characterEncoding=utf-8
+
 
   servlet: # servlet 的文件文件上传大小限制。
     multipart:
@@ -14,7 +13,9 @@ spring:
       max-file-size: 20MB
       max-request-size: 50MB
 
-
+logging:
+  level:
+    com.zrylovestan.arsenal: debug
 
 # mybatis 的基本设置，不要指定 location.
 mybatis:
@@ -23,36 +24,25 @@ mybatis:
     log-prefix: org.apache.ibatis.
     map-underscore-to-camel-case: true # 支持驼峰转下划线
   mapper-locations: classpath:mybatis/mapper/*.xml
-pagehelper: # pageHelper 分页插件设置
-  auto-runtime-dialect: true # 自动切换方言,不开启此项的话，会导致不同数据库sql 格式错误
+#pagehelper: # pageHelper 分页插件设置
+#  auto-runtime-dialect: true # 自动切换方言,不开启此项的话，会导致不同数据库sql 格式错误
 
 
 
-config:
-  checkDzhdCron: 0 */4 * * * ?  # 定时任务cron
-  sleepTime: 2000  # http请求的间隔，毫秒数
-  httpConnectTimeout: 30000  # 连接超时 毫秒数
-  httpReadTimeout: 20000 # 读超时  毫秒数
 
-wechat:
-  corpid: ww4d810f1479a29e4b
-  agentId: 1000012
-  corpsecret: IZw9gfoN_l3ORgZBb1vRGipv2nGkq_GOlh8rRv0dj_o
-  accessTokenUrl: https://qyapi.weixin.qq.com/cgi-bin/gettoken
-  msgSendUrl: https://qyapi.weixin.qq.com/cgi-bin/message/send
-  msgSendToGroupUrl: https://qyapi.weixin.qq.com/cgi-bin/appchat/send   # 群聊发送消息 接口
-  mediaUploadUrl: https://qyapi.weixin.qq.com/cgi-bin/media/upload
-  skGroupChatId: wrW9_0EAAAb1Mz1w0YL10rl5mhWr8_Bg   # 收款- 发送文件到 群聊，这个群聊的 chatid
+#wechat:
+#  corpid: ww4d810f1479a29e4b
+#  agentId: 1000012
+#  corpsecret: IZw9gfoN_l3ORgZBb1vRGipv2nGkq_GOlh8rRv0dj_o
+#  accessTokenUrl: https://qyapi.weixin.qq.com/cgi-bin/gettoken
+#  msgSendUrl: https://qyapi.weixin.qq.com/cgi-bin/message/send
+#  msgSendToGroupUrl: https://qyapi.weixin.qq.com/cgi-bin/appchat/send   # 群聊发送消息 接口
+#  mediaUploadUrl: https://qyapi.weixin.qq.com/cgi-bin/media/upload
+#  skGroupChatId: wrW9_0EAAAb1Mz1w0YL10rl5mhWr8_Bg   # 收款- 发送文件到 群聊，这个群聊的 chatid
 
-cbs:
-  requestHttpUrl: http://127.0.0.1:10666
-  port: 10666
-  bwKey: 2
-  CRC32_PASSWORD: CMBChina2009
-  CRC32_PREFIX: Z
-  actNbr: 591915131410208,310899991010008776083,755915678910506,755915678910202  # 交易账户
 
 
 server:
-  port: 8777
+  port: 8081
+
 

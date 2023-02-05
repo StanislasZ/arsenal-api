@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.cmbnb.weChatNotice.modules.wechat.mapper.WechatUserMapper">
+<mapper namespace="com.zrylovestan.arsenal.modules.wechat.mapper.WechatUserMapper">
 
     <delete id="deleteAll">
         delete from wechat_user where 1=1
@@ -28,7 +28,7 @@
     </update>
 
 
-    <select id="getWechatUserListByName" resultType="com.cmbnb.weChatNotice.modules.wechat.entity.WechatUser">
+    <select id="getWechatUserListByName" resultType="com.zrylovestan.arsenal.modules.wechat.entity.WechatUser">
         select * from wechat_user
         where name = #{name} and delete_flag = false
     </select>
@@ -51,7 +51,7 @@
         </where>
     </select>
 
-    <select id="getWechatUserList" resultType="com.cmbnb.weChatNotice.modules.wechat.entity.WechatUser">
+    <select id="getWechatUserList" resultType="com.zrylovestan.arsenal.modules.wechat.entity.WechatUser">
         select * from wechat_user
         <where>
             <if test="name != null and name != ''">
@@ -71,7 +71,7 @@
 
     </select>
 
-    <select id="getWechatUserExportList" resultType="com.cmbnb.weChatNotice.modules.wechat.entity.WechatUser">
+    <select id="getWechatUserExportList" resultType="com.zrylovestan.arsenal.modules.wechat.entity.WechatUser">
         select * from wechat_user
         where delete_flag = false
     </select>
